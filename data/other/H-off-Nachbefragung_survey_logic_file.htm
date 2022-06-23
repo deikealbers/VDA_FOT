@@ -1,0 +1,469 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/yiistrap.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/bootstrap-switch.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/select2.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/select2-bootstrap.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/bootstrap-datetimepicker.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/roboto.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/icomoon.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/lstutorial.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/adminbasics.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/adminsidepanel.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/lime-admin-colors.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/statistics.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/expressions.css">
+<link rel="stylesheet" type="text/css" href="H-off-Nachbefragung_survey_logic_file-Dateien/expressionlogicfile.css">
+<script type="text/javascript">window.debugState = {frontend : (0 === 1), backend : (0 === 1)};</script><script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/jquery-3.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/jquery-migrate-3.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/jquery-ui.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/adminsidepanel.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/js.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/bootstrap.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/bootstrapconfirm.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/moment-with-locales.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/select2.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/lslog.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/pjax.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/ckeditor_002.js" class="headScriptTag"></script><script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/loader.js"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/event_002.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/editor_basic.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/env.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/ckeditor_basic.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/log.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/dom.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/tools.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/dtd.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/event.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/domobject.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/node_002.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/window.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/document.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/nodelist.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/element_002.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/documentfragment.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/walker.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/range.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/iterator.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/command.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/ckeditor_base.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/config.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/filter_002.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/focusmanager.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/keystrokehandler.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/lang.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/scriptloader.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/resourcemanager.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/plugins.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/ui.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/editor.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/htmlparser.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/basicwriter.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/node.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/comment.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/text_002.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/cdata.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/fragment.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/filter.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/htmldataprocessor.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/element.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/template.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/ckeditor.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/inline.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/themedui.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/editable.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/selection.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/style.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/promise.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/optimization.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/color.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/comment_002.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/elementpath.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/text.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/rangelist.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/skin.js" type="text/javascript"></script><script src="H-off-Nachbefragung_survey_logic_file-Dateien/_bootstrap.js" type="text/javascript"></script><style>.cke{visibility:hidden;}</style>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/config_002.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/ckeditoradditions.js" class="headScriptTag"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/em_javascript.js" class="headScriptTag"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+
+           window.LS = window.LS || {}; window.LS.globalUserId = "111";
+/*]]>*/
+</script>
+</head><body><script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/bootstrap-switch.js"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/adminbasics.js"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/modaleditor.js"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/decimal.js"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/decimalcustom.js"></script>
+<style>
+           @page { 
+               size: landscape;
+           }
+            @media print { 
+                html {width: 670px; white-space: pre-wrap; overflow: visible;}
+                body {width: 100%; white-space: pre-wrap; overflow: visible; font-size: 12pt;}
+                table { overflow: visible !important; }
+                div { overflow: visible !important; }
+                * { overflow: visible !important; }
+                
+            }
+           </style><p class="LEMheading alert alert-success">Keine Syntaxfehler in dieser Umfrage festgestellt.</p>
+<div id="showlogicfilediv" class="table-responsive"><h3>Logikdatei für die Umfrage #[688159]: H-off Nachbefragung</h3>
+<table id="logicfiletable" class="table table-bordered"><tbody><tr>
+            <th class="column-0">#</th>
+            <th class="column-1">Name [ID]</th>
+            <th class="column-2">Bedingung [Validierung] (Standardwert)</th>
+            <th class="column-3">Text [Hilfe] (Hinweis)</th>
+            </tr>
+<tr class="LEMgroup"><td class="">G-0</td><td><b>Metadaten</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/688159/gid/6915">GID 6915</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>&nbsp;</td></tr>
+<tr class="LEMquestion"><td class="">Q-0</td><td><b>Einleitung</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89401">QID 89401</a>]<br>Text display [X]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>Vom VL auszufüllen<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-1</td><td><b><span class="mandatory">*</span>VP</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89398">QID 89398</a>]<br>Short free text [S]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>VP Nr<hr>[Hilfetext: <p>Gruppe A: 1-50</p>
+
+<p>Gruppe B: 51-100</p>
+]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>text_input_width</td><td>3</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-2</td><td><b><span class="mandatory">*</span>AutoFahrt</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89380">QID 89380</a>]<br>List (Radio) [L]  </td><td><span class="em-expression" data-original-title="" title="">1</span><hr>(VALIDATION: <span class="em-expression" data-original-title="" title="">(1)</span>)</td><td><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Arial, sans-serif;">Mit welchem Auto wurde die Fahrt absolviert?</span></span></span><hr>(Hinweis: 
+    <span></span>
+   Bitte wählen Sie eine der folgenden Antworten:
+
+)<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>fix_height</td><td>200</td></tr>
+<tr><td>horizontal_scroll</td><td>0</td></tr>
+<tr><td>keep_aspect</td><td>0</td></tr>
+<tr><td>crop_or_resize</td><td>0</td></tr>
+<tr><td>display_columns</td><td>2</td></tr>
+<tr><td>other_position</td><td>default</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEManswer"><td>A[0]-1</td><td><b>0</b></td><td>[VALUE: 0]</td><td>BMW</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>1</b></td><td>[VALUE: 0]</td><td>Ford</td></tr>
+<tr class="LEMquestion"><td class="">Q-3</td><td><b><span class="mandatory">*</span>DatumFahrt</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89379">QID 89379</a>]<br>Date/Time [D]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>An welchem Tag wurde der Fahrtblock absolviert?<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-4</td><td><b><span class="mandatory">*</span>DauerFahrt</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381">QID 89381</a>]<br>Numerical input [N]  </td><td><span class="em-expression" data-original-title="" title="">1</span><hr>(VALIDATION: <span class="em-expression" data-original-title="" title="">((<span title="" class="em-function" data-original-title="Herausfinden, ob eine Variable eine Nummer oder eine nummerische Zeichenkette ist; bool is_numeric(var)">is_numeric</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381" data-original-title="[java688159X6915X89381][G:0][Q:4]: &lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband &lt;strong&gt;&lt;u&gt;am Stück&lt;/u&gt;&lt;/strong&gt;&lt;b&gt; &lt;/b&gt;auf der Autobahn gefahren ist. Schätzung in Minuten.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]">DauerFahrt.NAOK</a>)<span data-original-title="" title=""> || </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381" data-original-title="[java688159X6915X89381][G:0][Q:4]: &lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband &lt;strong&gt;&lt;u&gt;am Stück&lt;/u&gt;&lt;/strong&gt;&lt;b&gt; &lt;/b&gt;auf der Autobahn gefahren ist. Schätzung in Minuten.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]">DauerFahrt.NAOK</a>)))<span data-original-title="" title=""> and </span>((<span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381" data-original-title="[java688159X6915X89381][G:0][Q:4]: &lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband &lt;strong&gt;&lt;u&gt;am Stück&lt;/u&gt;&lt;/strong&gt;&lt;b&gt; &lt;/b&gt;auf der Autobahn gefahren ist. Schätzung in Minuten.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]">DauerFahrt.NAOK</a>)<span data-original-title="" title=""> || </span><a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381" data-original-title="[java688159X6915X89381][G:0][Q:4]: &lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband &lt;strong&gt;&lt;u&gt;am Stück&lt;/u&gt;&lt;/strong&gt;&lt;b&gt; &lt;/b&gt;auf der Autobahn gefahren ist. Schätzung in Minuten.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]">DauerFahrt.NAOK</a><span data-original-title="" title=""> &gt;= </span>(5))<span data-original-title="" title=""> and </span>(<span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381" data-original-title="[java688159X6915X89381][G:0][Q:4]: &lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband &lt;strong&gt;&lt;u&gt;am Stück&lt;/u&gt;&lt;/strong&gt;&lt;b&gt; &lt;/b&gt;auf der Autobahn gefahren ist. Schätzung in Minuten.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]">DauerFahrt.NAOK</a>)<span data-original-title="" title=""> || </span><a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381" data-original-title="[java688159X6915X89381][G:0][Q:4]: &lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband &lt;strong&gt;&lt;u&gt;am Stück&lt;/u&gt;&lt;/strong&gt;&lt;b&gt; &lt;/b&gt;auf der Autobahn gefahren ist. Schätzung in Minuten.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]">DauerFahrt.NAOK</a><span data-original-title="" title=""> &lt;= </span>(300)))<span data-original-title="" title=""> and </span>((<span title="" class="em-function" data-original-title="Prüfen, ob der Wert einer Variablen ganzzahlig (integer) ist.; bool is_int(var)">is_int</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381" data-original-title="[java688159X6915X89381][G:0][Q:4]: &lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband &lt;strong&gt;&lt;u&gt;am Stück&lt;/u&gt;&lt;/strong&gt;&lt;b&gt; &lt;/b&gt;auf der Autobahn gefahren ist. Schätzung in Minuten.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]">DauerFahrt.NAOK</a>)<span data-original-title="" title=""> || </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89381" data-original-title="[java688159X6915X89381][G:0][Q:4]: &lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband &lt;strong&gt;&lt;u&gt;am Stück&lt;/u&gt;&lt;/strong&gt;&lt;b&gt; &lt;/b&gt;auf der Autobahn gefahren ist. Schätzung in Minuten.&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;br /&gt;[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]">DauerFahrt.NAOK</a>)))</span>)</td><td><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Arial, sans-serif;">Schätzung, wie lange der Proband <strong><u>am Stück</u></strong><b> </b>auf der Autobahn gefahren ist. Schätzung in Minuten.</span></span></span><br>[Eine kurze Unterbrechung &lt;5 min z.B. zum Wenden kann vernachlässigt werden.]<hr>(Hinweis: 
+    <span></span>
+   <span class="em-expression" data-original-title="" title=""><span title="" class="em-function" data-original-title="Bedingte Bearbeitung; if(test,result_if_true[,result_if_false = ''])">if</span>(<span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(5)<span data-original-title="" title=""> &amp;&amp; </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(300), <span title="" class="em-function" data-original-title="Gib eine formatierte Zeichenkette zurück; string sprintf(format, arg1, arg2, ... argN)">sprintf</span>(<span class="em-var-string" data-original-title="" title="">'Ihre Antwort muss mindestens %s sein.'</span>, <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(5)), <span class="em-var-string" data-original-title="" title="">''</span>)</span><span class="em-expression" data-original-title="" title=""><span title="" class="em-function" data-original-title="Bedingte Bearbeitung; if(test,result_if_true[,result_if_false = ''])">if</span>(<span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(5)<span data-original-title="" title=""> &amp;&amp; </span><span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(300), <span title="" class="em-function" data-original-title="Gib eine formatierte Zeichenkette zurück; string sprintf(format, arg1, arg2, ... argN)">sprintf</span>(<span class="em-var-string" data-original-title="" title="">'Ihre Antwort darf maximal %s sein.'</span>, <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(300)), <span class="em-var-string" data-original-title="" title="">''</span>)</span><span class="em-expression" data-original-title="" title=""><span title="" class="em-function" data-original-title="Bedingte Bearbeitung; if(test,result_if_true[,result_if_false = ''])">if</span>(<span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(5)<span data-original-title="" title=""> &amp;&amp; </span>(5)<span data-original-title="" title=""> == </span>(300), <span title="" class="em-function" data-original-title="Gib eine formatierte Zeichenkette zurück; string sprintf(format, arg1, arg2, ... argN)">sprintf</span>(<span class="em-var-string" data-original-title="" title="">'Ihre Antwort muss %s sein.'</span>, <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(5)), <span class="em-var-string" data-original-title="" title="">''</span>)</span><span class="em-expression" data-original-title="" title=""><span title="" class="em-function" data-original-title="Bedingte Bearbeitung; if(test,result_if_true[,result_if_false = ''])">if</span>(<span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(5)<span data-original-title="" title=""> &amp;&amp; </span><span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(300)<span data-original-title="" title=""> &amp;&amp; </span>(5)<span data-original-title="" title=""> != </span>(300), <span title="" class="em-function" data-original-title="Gib eine formatierte Zeichenkette zurück; string sprintf(format, arg1, arg2, ... argN)">sprintf</span>(<span class="em-var-string" data-original-title="" title="">'Ihre Antwort muss zwischen %s und %s liegen.'</span>, <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(5), <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(300)), <span class="em-var-string" data-original-title="" title="">''</span>)</span>
+
+
+    <span></span>
+   In diesem Feld darf nur ein ganzzahliger Wert eingetragen werden.
+
+)<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>suffix</td><td>min</td></tr>
+<tr><td>text_input_width</td><td>4</td></tr>
+<tr><td>maximum_chars</td><td>3</td></tr>
+<tr><td>min_num_value_n</td><td><span class="em-expression" data-original-title="" title="">5</span></td></tr>
+<tr><td>num_value_int_only</td><td>1</td></tr>
+<tr><td>max_num_value_n</td><td><span class="em-expression" data-original-title="" title="">300</span></td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-5</td><td><b><span class="mandatory">*</span>L2AnteilFahrt</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382">QID 89382</a>]<br>Numerical input [N]  </td><td><span class="em-expression" data-original-title="" title="">1</span><hr>(VALIDATION: <span class="em-expression" data-original-title="" title="">((<span title="" class="em-function" data-original-title="Herausfinden, ob eine Variable eine Nummer oder eine nummerische Zeichenkette ist; bool is_numeric(var)">is_numeric</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382" data-original-title="[java688159X6915X89382][G:0][Q:5]: &lt;p&gt;&lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;">L2AnteilFahrt.NAOK</a>)<span data-original-title="" title=""> || </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382" data-original-title="[java688159X6915X89382][G:0][Q:5]: &lt;p&gt;&lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;">L2AnteilFahrt.NAOK</a>)))<span data-original-title="" title=""> and </span>((<span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382" data-original-title="[java688159X6915X89382][G:0][Q:5]: &lt;p&gt;&lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;">L2AnteilFahrt.NAOK</a>)<span data-original-title="" title=""> || </span><a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382" data-original-title="[java688159X6915X89382][G:0][Q:5]: &lt;p&gt;&lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;">L2AnteilFahrt.NAOK</a><span data-original-title="" title=""> &gt;= </span>(0))<span data-original-title="" title=""> and </span>(<span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382" data-original-title="[java688159X6915X89382][G:0][Q:5]: &lt;p&gt;&lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;">L2AnteilFahrt.NAOK</a>)<span data-original-title="" title=""> || </span><a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382" data-original-title="[java688159X6915X89382][G:0][Q:5]: &lt;p&gt;&lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;">L2AnteilFahrt.NAOK</a><span data-original-title="" title=""> &lt;= </span>(100)))<span data-original-title="" title=""> and </span>((<span title="" class="em-function" data-original-title="Prüfen, ob der Wert einer Variablen ganzzahlig (integer) ist.; bool is_int(var)">is_int</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382" data-original-title="[java688159X6915X89382][G:0][Q:5]: &lt;p&gt;&lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;">L2AnteilFahrt.NAOK</a>)<span data-original-title="" title=""> || </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6915/qid/89382" data-original-title="[java688159X6915X89382][G:0][Q:5]: &lt;p&gt;&lt;span style=&quot;font-size:11.0pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Schätzung, wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;">L2AnteilFahrt.NAOK</a>)))</span>)</td><td><p><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Arial, sans-serif;">Schätzung,
+ wie lange der Proband am Stück mit aktivem L2 gefahren ist. Schätzung 
+in Minuten. [Kurze Unterbrechungen können vernachlässigt werden.]</span></span></span></p>
+<hr>(Hinweis: 
+    <span></span>
+   <span class="em-expression" data-original-title="" title=""><span title="" class="em-function" data-original-title="Bedingte Bearbeitung; if(test,result_if_true[,result_if_false = ''])">if</span>(<span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(0)<span data-original-title="" title=""> &amp;&amp; </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(100), <span title="" class="em-function" data-original-title="Gib eine formatierte Zeichenkette zurück; string sprintf(format, arg1, arg2, ... argN)">sprintf</span>(<span class="em-var-string" data-original-title="" title="">'Ihre Antwort muss mindestens %s sein.'</span>, <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(0)), <span class="em-var-string" data-original-title="" title="">''</span>)</span><span class="em-expression" data-original-title="" title=""><span title="" class="em-function" data-original-title="Bedingte Bearbeitung; if(test,result_if_true[,result_if_false = ''])">if</span>(<span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(0)<span data-original-title="" title=""> &amp;&amp; </span><span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(100), <span title="" class="em-function" data-original-title="Gib eine formatierte Zeichenkette zurück; string sprintf(format, arg1, arg2, ... argN)">sprintf</span>(<span class="em-var-string" data-original-title="" title="">'Ihre Antwort darf maximal %s sein.'</span>, <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(100)), <span class="em-var-string" data-original-title="" title="">''</span>)</span><span class="em-expression" data-original-title="" title=""><span title="" class="em-function" data-original-title="Bedingte Bearbeitung; if(test,result_if_true[,result_if_false = ''])">if</span>(<span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(0)<span data-original-title="" title=""> &amp;&amp; </span>(0)<span data-original-title="" title=""> == </span>(100), <span title="" class="em-function" data-original-title="Gib eine formatierte Zeichenkette zurück; string sprintf(format, arg1, arg2, ... argN)">sprintf</span>(<span class="em-var-string" data-original-title="" title="">'Ihre Antwort muss %s sein.'</span>, <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(0)), <span class="em-var-string" data-original-title="" title="">''</span>)</span><span class="em-expression" data-original-title="" title=""><span title="" class="em-function" data-original-title="Bedingte Bearbeitung; if(test,result_if_true[,result_if_false = ''])">if</span>(<span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(0)<span data-original-title="" title=""> &amp;&amp; </span><span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(100)<span data-original-title="" title=""> &amp;&amp; </span>(0)<span data-original-title="" title=""> != </span>(100), <span title="" class="em-function" data-original-title="Gib eine formatierte Zeichenkette zurück; string sprintf(format, arg1, arg2, ... argN)">sprintf</span>(<span class="em-var-string" data-original-title="" title="">'Ihre Antwort muss zwischen %s und %s liegen.'</span>, <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(0), <span title="" class="em-function" data-original-title="Zeige Zahlen mit Komma als Dezimaltrennzeichen, wenn benötigt; string fixnum(number)">fixnum</span>(100)), <span class="em-var-string" data-original-title="" title="">''</span>)</span>
+
+
+    <span></span>
+   In diesem Feld darf nur ein ganzzahliger Wert eingetragen werden.
+
+)<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>suffix</td><td>min</td></tr>
+<tr><td>text_input_width</td><td>4</td></tr>
+<tr><td>maximum_chars</td><td>3</td></tr>
+<tr><td>min_num_value_n</td><td><span class="em-expression" data-original-title="" title="">0</span></td></tr>
+<tr><td>num_value_int_only</td><td>1</td></tr>
+<tr><td>max_num_value_n</td><td><span class="em-expression" data-original-title="" title="">100</span></td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMgroup"><td class="">G-1</td><td><b>Probandencode</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/688159/gid/6921">GID 6921</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><strong>Verwenden
+ Sie bitte nicht den "Vor"- oder "Zurück"-Button Ihres Browsers. Dies 
+führt dazu, dass die Seite abstürzt. Die Daten müssen dann erneut 
+ausgefüllt werden.</strong></td></tr>
+<tr class="LEMquestion"><td class="">Q-6</td><td><b><span class="mandatory">*</span>Probandencode</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6921/qid/89388">QID 89388</a>]<br>Multiple short text [Q]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Arial, sans-serif;">Bitte
+ generieren Sie Ihren persönlichen Versuchspersonen-Code für die Studie.
+ Dieser Code besitzt den Vorteil, dass Sie den Code mittels der Fragen 
+jederzeit neu generieren können, außenstehende Dritte jedoch kaum. Wir 
+benötigen diesen Code, um Ihre Daten der Vorbefragung mit den Daten der 
+Versuchsfahrt zu verknüpfen.</span></span></span></p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>input_size</td><td>30</td></tr>
+<tr><td>maximum_chars</td><td>2</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMsubq"><td>SQ-1</td><td><b>Probandencode_Vorname</b></td><td>&nbsp;</td><td>Letzte zwei Buchstaben des Vornamens Ihrer Mutter<br>(NA für Anna):</td></tr><tr class="LEMsubq"><td>SQ-2</td><td><b>Probandencode_Strasse</b></td><td>&nbsp;</td><td>Erste zwei Buchstaben Ihres Geburtsortes<br>(BE für Berlin):</td></tr><tr class="LEMsubq"><td>SQ-3</td><td><b>Probandencode_Tag</b></td><td>&nbsp;</td><td>Monat Ihres eigenen Geburtstages<br>(zweistellig: 06 für Juni):</td></tr><tr class="LEMgroup"><td class="">G-2</td><td><b>Vertrauen</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/688159/gid/6916">GID 6916</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>&nbsp;</td></tr>
+<tr class="LEMquestion"><td class="">Q-7</td><td><b>DefGesamtsystem1</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6916/qid/89389">QID 89389</a>]<br>Text display [X]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Beachten
+ Sie bitte, dass die folgenden Fragen sich nicht&nbsp;auf das 
+Gesamtfahrzeug (Fahrzeugabmessungen, PS/Motorisierung, Design, Bedienung
+ Klimaanlage etc.) beziehen.&nbsp;Sofern nicht anders spezifiziert, 
+beinhaltet der Begriff System folgendes:</span></span></span></span></p>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Das System umfasst das Fahrerassistenzsystem “Level 2 automatisiertes Fahren“.<br>Hierin eingeschlossen sind folgende Komponenten:</span></span></span></span></p>
+
+<ul>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsverhalten:</span></span></span></span>
+
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Spurhaltung, Beschleunigungsverhalten, Abstand zu anderen Verkehrsteilnehmern etc.</span></span></span></span></li>
+	</ul>
+	</li>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Anzeige-Bedienkonzept:</span></span></span></span>
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bedienelemente zur De- und Aktivierung sowie Einstellungen des Fahrerassistenzsystems</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">das Fahrerassistenzsystem betreffende Anzeigen, Töne, Lichtsignale etc.</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsweise
+ und -prinzipien des Fahrerassistenzsystems wie die Häufigkeit oder der 
+Anlass für Hinweise, Warnungen, Anzeigen etc.</span></span></span></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bewerten Sie&nbsp;</span></span><span style="font-family:Arial, sans-serif;">hier
+ nur die Umsetzung des soeben erlebten Fahrerassistenzsystems. Der Fokus
+ liegt also nicht darauf, wie sinnvoll Sie automatisiertes Fahren im 
+Allgemeinen finden.</span></span></span></p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-8</td><td><b><span class="mandatory">*</span>Vertrauen</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6916/qid/89384">QID 89384</a>]<br>Array [F]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>Bitte geben Sie an, inwiefern Sie den Aussagen zustimmen.<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>repeat_headings</td><td>10</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMsubq"><td>SQ-1</td><td><b>Vertrauen_TiA1</b></td><td>&nbsp;</td><td>Das System ist imstande Situationen richtig einzuschätzen.</td></tr><tr class="LEMsubq"><td>SQ-2</td><td><b>Vertrauen_TiA2</b></td><td>&nbsp;</td><td>Mir war durchgehend klar, in welchem Zustand sich das System befindet. </td></tr><tr class="LEMsubq"><td>SQ-3</td><td><b>Vertrauen_TiA3</b></td><td>&nbsp;</td><td>Ich kenne bereits ähnliche Systeme.</td></tr><tr class="LEMsubq"><td>SQ-4</td><td><b>Vertrauen_TiA4</b></td><td>&nbsp;</td><td>Die Entwickler sind vertrauenswürdig.</td></tr><tr class="LEMsubq"><td>SQ-5</td><td><b>Vertrauen_TiA5</b></td><td>&nbsp;</td><td>Bei unbekannten automatisierten Systemen sollte man eher vorsichtig sein. </td></tr><tr class="LEMsubq"><td>SQ-6</td><td><b>Vertrauen_TiA6</b></td><td>&nbsp;</td><td>Das System arbeitet zuverlässig. </td></tr><tr class="LEMsubq"><td>SQ-7</td><td><b>Vertrauen_TiA7</b></td><td>&nbsp;</td><td>Das System reagiert unvorhersehbar.</td></tr><tr class="LEMsubq"><td>SQ-8</td><td><b>Vertrauen_TiA8</b></td><td>&nbsp;</td><td>Die Entwickler nehmen mein Wohlergehen ernst. </td></tr><tr class="LEMsubq"><td>SQ-9</td><td><b>Vertrauen_TiA9</b></td><td>&nbsp;</td><td>Ich vertraue dem System. </td></tr><tr class="LEMsubq"><td>SQ-10</td><td><b>Vertrauen_TiA10</b></td><td>&nbsp;</td><td>Ein Ausfall des Systems ist wahrscheinlich. </td></tr><tr class="LEMsubq"><td>SQ-11</td><td><b>Vertrauen_TiA11</b></td><td>&nbsp;</td><td>Ich konnte nachvollziehen, warum etwas passiert ist.</td></tr><tr class="LEMsubq"><td>SQ-12</td><td><b>Vertrauen_TiA12</b></td><td>&nbsp;</td><td>Ich vertraue einem System eher, als dass ich ihm misstraue. </td></tr><tr class="LEMsubq"><td>SQ-13</td><td><b>Vertrauen_TiA13</b></td><td>&nbsp;</td><td>Das System kann wirklich komplizierte Aufgaben übernehmen.</td></tr><tr class="LEMsubq"><td>SQ-14</td><td><b>Vertrauen_TiA14</b></td><td>&nbsp;</td><td>Ich kann mich auf das System verlassen.</td></tr><tr class="LEMsubq"><td>SQ-15</td><td><b>Vertrauen_TiA15</b></td><td>&nbsp;</td><td>Das System könnte stellenweise einen Fehler machen.</td></tr><tr class="LEMsubq"><td>SQ-16</td><td><b>Vertrauen_TiA16</b></td><td>&nbsp;</td><td>Zu erkennen, was das System als Nächstes macht, ist schwer.</td></tr><tr class="LEMsubq"><td>SQ-17</td><td><b>Vertrauen_TiA17</b></td><td>&nbsp;</td><td>Ich habe ähnliche Systeme bereits genutzt.</td></tr><tr class="LEMsubq"><td>SQ-18</td><td><b>Vertrauen_TiA18</b></td><td>&nbsp;</td><td>Automatisierte Systeme funktionieren generell gut.</td></tr><tr class="LEMsubq"><td>SQ-19</td><td><b>Vertrauen_TiA19</b></td><td>&nbsp;</td><td>Ich bin überzeugt von den Fähigkeiten des Systems.</td></tr><tr class="LEManswer"><td>A[0]-1</td><td><b>0</b></td><td>[VALUE: 0]</td><td>Stimme gar nicht zu</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>1</b></td><td>[VALUE: 0]</td><td>Stimme eher nicht zu</td></tr>
+<tr class="LEManswer"><td>A[0]-3</td><td><b>2</b></td><td>[VALUE: 0]</td><td>Stimme<br>weder zu<br>noch<br>nicht zu</td></tr>
+<tr class="LEManswer"><td>A[0]-4</td><td><b>3</b></td><td>[VALUE: 0]</td><td>Stimme eher zu</td></tr>
+<tr class="LEManswer"><td>A[0]-5</td><td><b>4</b></td><td>[VALUE: 0]</td><td>Stimme voll zu</td></tr>
+<tr class="LEManswer"><td>A[0]-6</td><td><b>5</b></td><td>[VALUE: 0]</td><td>keine Angabe</td></tr>
+<tr class="LEMgroup"><td class="">G-3</td><td><b>Akzeptanz</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/688159/gid/6917">GID 6917</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>&nbsp;</td></tr>
+<tr class="LEMquestion"><td class="">Q-9</td><td><b>DefGesamtsystem2</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6917/qid/89394">QID 89394</a>]<br>Text display [X]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Beachten
+ Sie bitte, dass die folgenden Fragen sich nicht&nbsp;auf das 
+Gesamtfahrzeug (Fahrzeugabmessungen, PS/Motorisierung, Design, Bedienung
+ Klimaanlage etc.) beziehen.&nbsp;Sofern nicht anders spezifiziert, 
+beinhaltet der Begriff System folgendes:</span></span></span></span></p>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Das System umfasst das Fahrerassistenzsystem “Level 2 automatisiertes Fahren“.<br>Hierin eingeschlossen sind folgende Komponenten:</span></span></span></span></p>
+
+<ul>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsverhalten:</span></span></span></span>
+
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Spurhaltung, Beschleunigungsverhalten, Abstand zu anderen Verkehrsteilnehmern etc.</span></span></span></span></li>
+	</ul>
+	</li>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Anzeige-Bedienkonzept:</span></span></span></span>
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bedienelemente zur De- und Aktivierung sowie Einstellungen des Fahrerassistenzsystems</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">das Fahrerassistenzsystem betreffende Anzeigen, Töne, Lichtsignale etc.</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsweise
+ und -prinzipien des Fahrerassistenzsystems wie die Häufigkeit oder der 
+Anlass für Hinweise, Warnungen, Anzeigen etc.</span></span></span></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bewerten Sie&nbsp;</span></span><span style="font-family:Arial, sans-serif;">hier
+ nur die Umsetzung des soeben erlebten Fahrerassistenzsystems. Der Fokus
+ liegt also nicht darauf, wie sinnvoll Sie automatisiertes Fahren im 
+Allgemeinen finden.</span></span></span></p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-10</td><td><b><span class="mandatory">*</span>Akzeptanz</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6917/qid/89385">QID 89385</a>]<br>Array [F]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>Bitte geben Sie an, inwiefern Sie den Aussagen zustimmen.<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>repeat_headings</td><td>7</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMsubq"><td>SQ-1</td><td><b>Akzeptanz_PE1</b></td><td>&nbsp;</td><td>Das System wäre während des Fahrens nützlich.</td></tr><tr class="LEMsubq"><td>SQ-2</td><td><b>Akzeptanz_PE3</b></td><td>&nbsp;</td><td>Durch die Nutzung des Systems würde sich meine Fahrperformanz verbessern.</td></tr><tr class="LEMsubq"><td>SQ-3</td><td><b>Akzeptanz_PE4</b></td><td>&nbsp;</td><td>Wenn ich das System nutzen würde, würde ich mein Ziel sicher (= gefahrenlos) erreichen.</td></tr><tr class="LEMsubq"><td>SQ-4</td><td><b>Akzeptanz_EE1</b></td><td>&nbsp;</td><td>Meine Interaktion mit dem System wäre klar und verständlich.</td></tr><tr class="LEMsubq"><td>SQ-5</td><td><b>Akzeptanz_EE2</b></td><td>&nbsp;</td><td>Es wäre ein Leichtes für mich, geschickt im Umgang mit dem System zu werden. </td></tr><tr class="LEMsubq"><td>SQ-6</td><td><b>Akzeptanz_EE3</b></td><td>&nbsp;</td><td>Ich fände das System einfach zu bedienen.</td></tr><tr class="LEMsubq"><td>SQ-7</td><td><b>Akzeptanz_EE4</b></td><td>&nbsp;</td><td>Das Erlernen der Bedienung des Systems würde mir leicht fallen.</td></tr><tr class="LEMsubq"><td>SQ-8</td><td><b>Akzeptanz_ATT1</b></td><td>&nbsp;</td><td>Die Verwendung des Systems wäre eine gute Idee.</td></tr><tr class="LEMsubq"><td>SQ-9</td><td><b>Akzeptanz_ATT2</b></td><td>&nbsp;</td><td>Das System würde das Fahren interessanter machen.</td></tr><tr class="LEMsubq"><td>SQ-10</td><td><b>Akzeptanz_ATT3</b></td><td>&nbsp;</td><td>Es würde Spaß machen mit dem System zu interagieren.</td></tr><tr class="LEMsubq"><td>SQ-11</td><td><b>Akzeptanz_ATT4</b></td><td>&nbsp;</td><td>Ich würde es mögen mit dem System zu interagieren. </td></tr><tr class="LEMsubq"><td>SQ-12</td><td><b>Akzeptanz_FC1</b></td><td>&nbsp;</td><td>Während der Nutzung des Systems könnte ich ein sicheres Fahrverhalten garantieren. </td></tr><tr class="LEMsubq"><td>SQ-13</td><td><b>Akzeptanz_FC2</b></td><td>&nbsp;</td><td>Ich hätte das nötige Wissen, um das System zu nutzen.</td></tr><tr class="LEMsubq"><td>SQ-14</td><td><b>Akzeptanz_FC3</b></td><td>&nbsp;</td><td>Das System wäre mit anderen Systemen, die ich in meinem Fahrzeug nutze, kompatibel.</td></tr><tr class="LEMsubq"><td>SQ-15</td><td><b>Akzeptanz_ITU1</b></td><td>&nbsp;</td><td>Angenommen, ich hätte Zugang zu dem System, würde ich beabsichtigen, es zu nutzen.</td></tr><tr class="LEMsubq"><td>SQ-16</td><td><b>Akzeptanz_ITU2</b></td><td>&nbsp;</td><td>Angenommen, ich hätte Zugang zu dem System, sage ich voraus, dass ich es nutzen würde.</td></tr><tr class="LEMsubq"><td>SQ-17</td><td><b>Akzeptanz_ITU3</b></td><td>&nbsp;</td><td>Wenn das System für mich verfügbar ist, plane ich, es in den nächsten Monaten zu nutzen.</td></tr><tr class="LEMsubq"><td>SQ-18</td><td><b>Akzeptanz_PS1</b></td><td>&nbsp;</td><td>Ich glaube, dass die Nutzung des Systems gefährlich wäre.</td></tr><tr class="LEMsubq"><td>SQ-19</td><td><b>Akzeptanz_PS2</b></td><td>&nbsp;</td><td>Die Benutzung des Systems würde erhöhte Aufmerksamkeit erfordern.</td></tr><tr class="LEMsubq"><td>SQ-20</td><td><b>Akzeptanz_PS3</b></td><td>&nbsp;</td><td>Das System würde mich vom Verkehrsgeschehen ablenken.</td></tr><tr class="LEMsubq"><td>SQ-21</td><td><b>Akzeptanz_PS4</b></td><td>&nbsp;</td><td>Ich würde mich bei der Nutzung des Systems sicher fühlen.</td></tr><tr class="LEMsubq"><td>SQ-22</td><td><b>Akzeptanz_PS5</b></td><td>&nbsp;</td><td>Die Verwendung des Systems würde das Unfallrisiko verringern.</td></tr><tr class="LEMsubq"><td>SQ-23</td><td><b>Akzeptanz_PS6</b></td><td>&nbsp;</td><td>Ich könnte das System nutzen, ohne hinschauen zu müssen.</td></tr><tr class="LEManswer"><td>A[0]-1</td><td><b>1</b></td><td>[VALUE: 0]</td><td>Stimme überhaupt nicht zu</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>2</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-3</td><td><b>3</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-4</td><td><b>4</b></td><td>[VALUE: 0]</td><td>Neutral</td></tr>
+<tr class="LEManswer"><td>A[0]-5</td><td><b>5</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-6</td><td><b>6</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-7</td><td><b>7</b></td><td>[VALUE: 0]</td><td>Stimme voll zu</td></tr>
+<tr class="LEMgroup"><td class="">G-4</td><td><b>Systemverstaendnis</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/688159/gid/6918">GID 6918</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>&nbsp;</td></tr>
+<tr class="LEMquestion"><td class="">Q-11</td><td><b>DefGesamtsystem3</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6918/qid/89395">QID 89395</a>]<br>Text display [X]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Beachten
+ Sie bitte, dass die folgenden Fragen sich nicht&nbsp;auf das 
+Gesamtfahrzeug (Fahrzeugabmessungen, PS/Motorisierung, Design, Bedienung
+ Klimaanlage etc.) beziehen.&nbsp;Sofern nicht anders spezifiziert, 
+beinhaltet der Begriff System folgendes:</span></span></span></span></p>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Das System umfasst das Fahrerassistenzsystem “Level 2 automatisiertes Fahren“.<br>Hierin eingeschlossen sind folgende Komponenten:</span></span></span></span></p>
+
+<ul>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsverhalten:</span></span></span></span>
+
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Spurhaltung, Beschleunigungsverhalten, Abstand zu anderen Verkehrsteilnehmern etc.</span></span></span></span></li>
+	</ul>
+	</li>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Anzeige-Bedienkonzept:</span></span></span></span>
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bedienelemente zur De- und Aktivierung sowie Einstellungen des Fahrerassistenzsystems</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">das Fahrerassistenzsystem betreffende Anzeigen, Töne, Lichtsignale etc.</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsweise
+ und -prinzipien des Fahrerassistenzsystems wie die Häufigkeit oder der 
+Anlass für Hinweise, Warnungen, Anzeigen etc.</span></span></span></span></li>
+	</ul>
+	</li>
+</ul>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-12</td><td><b><span class="mandatory">*</span>Systemverstaendnis</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6918/qid/89390">QID 89390</a>]<br>Array [F]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>Bitte beantworten Sie folgende Fragen:<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMsubq"><td>SQ-1</td><td><b>Systemverstaendnis_1</b></td><td>&nbsp;</td><td>Das System erfordert nach Aktivierung zu jeder Zeit mindestens eine Hand des Fahrers am Steuer.</td></tr><tr class="LEMsubq"><td>SQ-2</td><td><b>Systemverstaendnis_2</b></td><td>&nbsp;</td><td>Das System kann jederzeit vom Fahrer durch Bremsen, Beschleunigen oder Lenken übersteuert werden.</td></tr><tr class="LEMsubq"><td>SQ-3</td><td><b>Systemverstaendnis_3</b></td><td>&nbsp;</td><td>Ich muss das system stets überwachen, wenn das System aktiviert ist.</td></tr><tr class="LEMsubq"><td>SQ-4</td><td><b>Systemverstaendnis_4</b></td><td>&nbsp;</td><td>Wenn das System aktiviert ist, ist das System verantwortlich für die Fahrsicherheit.</td></tr><tr class="LEMsubq"><td>SQ-5</td><td><b>Systemverstaendnis_5</b></td><td>&nbsp;</td><td>Ich darf mich mit fahrfremden Tätigkeiten wie z.B. E-Mails schreiben beschäftigen, wenn das System aktiviert ist.</td></tr><tr class="LEMsubq"><td>SQ-6</td><td><b>Systemverstaendnis_6</b></td><td>&nbsp;</td><td>Der Fahrer muss das System bewusst aktivieren.</td></tr><tr class="LEMsubq"><td>SQ-7</td><td><b>Systemverstaendnis_7</b></td><td>&nbsp;</td><td>Das System passt die Geschwindigkeit an die des vorausfahrenden Fahrzeuges an.</td></tr><tr class="LEMsubq"><td>SQ-8</td><td><b>Systemverstaendnis_8</b></td><td>&nbsp;</td><td>Das System kann Fahruntauglichkeit durch Müdigkeit des Fahrers ausgleichen.</td></tr><tr class="LEMsubq"><td>SQ-9</td><td><b>Systemverstaendnis_9</b></td><td>&nbsp;</td><td>Der
+ Fahrer darf sich von der Überwachung des Verkehrsraums abwenden, wenn 
+das System aktiviert ist und eine andere Person im Fahrzeug diese 
+Aufgabe für mich übernimmt.</td></tr><tr class="LEMsubq"><td>SQ-10</td><td><b>Systemverstaendnis_10</b></td><td>&nbsp;</td><td>Der
+ Fahrer darf sich von der Überwachung des Verkehrsraums abwenden, wenn 
+das System aktiviert ist und keine anderen Fahrzeuge in meiner Nähe 
+sind.</td></tr><tr class="LEMsubq"><td>SQ-11</td><td><b>Systemverstaendnis_11</b></td><td>&nbsp;</td><td>Das System erkennt immer, wenn es eine Situation nicht meistern kann.</td></tr><tr class="LEMsubq"><td>SQ-12</td><td><b>Systemverstaendnis_12</b></td><td>&nbsp;</td><td>Das System lenkt automatisch.</td></tr><tr class="LEMsubq"><td>SQ-13</td><td><b>Systemverstaendnis_13</b></td><td>&nbsp;</td><td>Der Fahrer muss innerhalb von Sekunden die Fahraufgabe übernehmen können.</td></tr><tr class="LEMsubq"><td>SQ-14</td><td><b>Systemverstaendnis_14</b></td><td>&nbsp;</td><td>Ich muss auch bei aktivierter Automation zu jedem Zeitpunkt wach bleiben. </td></tr><tr class="LEMsubq"><td>SQ-15</td><td><b>Systemverstaendnis_15</b></td><td>&nbsp;</td><td>Ich sollte niemals unaufgefordert in die Automation eingreifen. </td></tr><tr class="LEMsubq"><td>SQ-16</td><td><b>Systemverstaendnis_16</b></td><td>&nbsp;</td><td>In
+ der folgenden Situation kann es passieren, dass das System die 
+Situation nicht richtig einschätzen kann und der Fahrer eingreifen muss:
+ Es sind Schlaglöcher auf der Straße, die das Erkennen der 
+Fahrbahnmarkierung erschweren.</td></tr><tr class="LEManswer"><td>A[0]-1</td><td><b>0</b></td><td>[VALUE: 0]</td><td>Nicht zutreffend</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>1</b></td><td>[VALUE: 0]</td><td>Zutreffend</td></tr>
+<tr class="LEManswer"><td>A[0]-3</td><td><b>2</b></td><td>[VALUE: 0]</td><td>Unsicher</td></tr>
+<tr class="LEMgroup"><td class="">G-5</td><td><b>NDRTs</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/688159/gid/6919">GID 6919</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>&nbsp;</td></tr>
+<tr class="LEMquestion"><td class="">Q-13</td><td><b>DefGesamtsystem4</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6919/qid/89396">QID 89396</a>]<br>Text display [X]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Beachten
+ Sie bitte, dass die folgenden Fragen sich nicht&nbsp;auf das 
+Gesamtfahrzeug (Fahrzeugabmessungen, PS/Motorisierung, Design, Bedienung
+ Klimaanlage etc.) beziehen.&nbsp;Sofern nicht anders spezifiziert, 
+beinhaltet der Begriff System folgendes:</span></span></span></span></p>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Das System umfasst das Fahrerassistenzsystem “Level 2 automatisiertes Fahren“.<br>Hierin eingeschlossen sind folgende Komponenten:</span></span></span></span></p>
+
+<ul>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsverhalten:</span></span></span></span>
+
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Spurhaltung, Beschleunigungsverhalten, Abstand zu anderen Verkehrsteilnehmern etc.</span></span></span></span></li>
+	</ul>
+	</li>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Anzeige-Bedienkonzept:</span></span></span></span>
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bedienelemente zur De- und Aktivierung sowie Einstellungen des Fahrerassistenzsystems</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">das Fahrerassistenzsystem betreffende Anzeigen, Töne, Lichtsignale etc.</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsweise
+ und -prinzipien des Fahrerassistenzsystems wie die Häufigkeit oder der 
+Anlass für Hinweise, Warnungen, Anzeigen etc.</span></span></span></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bewerten Sie&nbsp;</span></span><span style="font-family:Arial, sans-serif;">hier
+ nur die Umsetzung des soeben erlebten Fahrerassistenzsystems. Der Fokus
+ liegt also nicht darauf, wie sinnvoll Sie automatisiertes Fahren im 
+Allgemeinen finden.</span></span></span></p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-14</td><td><b><span class="mandatory">*</span>NDRTs</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6919/qid/89391">QID 89391</a>]<br>Array [F]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>Stellen
+ Sie sich vor, das System wäre in Ihrem privaten Fahrzeug verfügbar. 
+Bitte geben Sie an, wie oft Sie sich mit folgenden Tätigkeiten 
+beschäftigen würden, wenn Sie auf der Autobahn fahren und das System 
+aktiviert ist.<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMsubq"><td>SQ-1</td><td><b>NDRTs_NDRT1</b></td><td>&nbsp;</td><td><p><strong>Handy oder ähnliches Gerät (Laptop, externes Navi, Tablet, …) in der Hand - Bedienung</strong><br>SMS/WhatsApp Nachrichten verfassen oder lesen; Browsing; …</p></td></tr><tr class="LEMsubq"><td>SQ-2</td><td><b>NDRTs_NDRT2</b></td><td>&nbsp;</td><td><strong>Handy oder ähnliches Gerät (Tablet, …) in der Hand - Sprechen</strong><br>Telefonieren <u>ohne Freisprechanlage</u>; Aufnehmen von Sprachnachrichten; ...</td></tr><tr class="LEMsubq"><td>SQ-3</td><td><b>NDRTs_NDRT3</b></td><td>&nbsp;</td><td><strong>Handy oder ähnliches Gerät (Tablet, …) fest installiert bzw. mit Freisprechanlage verbunden - Sprechen</strong><br>Telefonieren <u>mit Freisprechanlage</u>; aufnehmen von Sprachnachrichten über Sprachbefehle; ...<br>nicht: Unterhaltung mit Beifahrern, also Personen im Fahrzeug befinden</td></tr><tr class="LEMsubq"><td>SQ-4</td><td><b>NDRTs_NDRT4</b></td><td>&nbsp;</td><td><strong>Bedienung von Systemen im Fahrzeug (nicht direkt relevant für die Fahraufgabe)</strong><br>Bedienen
+ der integrierten Navigation; Einstellungen im Infotainmentsystem 
+vornehmen; Verstellen des Sitzes; Einstellen der Klimaanlage; …</td></tr><tr class="LEMsubq"><td>SQ-5</td><td><b>NDRTs_NDRT5</b></td><td>&nbsp;</td><td><strong>Essen/Trinken/Rauchen</strong><br>Öffnen einer Dose; Essen eines Apfels; Anzünden einer Zigarette; …</td></tr><tr class="LEMsubq"><td>SQ-6</td><td><b>NDRTs_NDRT6</b></td><td>&nbsp;</td><td><strong>Körperpflege/ Make-Up/...</strong><br>Frisieren; Make-Up; Nagelpflege; …<br><u>Nicht</u>: kurze, unbewusste Handlungen (z.B. kratzen)</td></tr><tr class="LEMsubq"><td>SQ-7</td><td><b>NDRTs_NDRT7</b></td><td>&nbsp;</td><td><strong>Interaktionen mit Beifahrern</strong><br>Unterhalten mit Beifahrer; Gestikulieren vor Beifahrer; Blicke zum Beifahrer; …</td></tr><tr class="LEMsubq"><td>SQ-8</td><td><b>NDRTs_NDRT8</b></td><td>&nbsp;</td><td><strong>Suchen; Greifen; Kramen; …</strong><br>Suchen nach Objekt(en) und hingreifen, z.B. in einer Tasche</td></tr><tr class="LEManswer"><td>A[0]-1</td><td><b>0</b></td><td>[VALUE: 0]</td><td>Nie</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>1</b></td><td>[VALUE: 0]</td><td>Sehr selten</td></tr>
+<tr class="LEManswer"><td>A[0]-3</td><td><b>2</b></td><td>[VALUE: 0]</td><td>Selten</td></tr>
+<tr class="LEManswer"><td>A[0]-4</td><td><b>3</b></td><td>[VALUE: 0]</td><td>Gelegentlich</td></tr>
+<tr class="LEManswer"><td>A[0]-5</td><td><b>4</b></td><td>[VALUE: 0]</td><td>Oft</td></tr>
+<tr class="LEManswer"><td>A[0]-6</td><td><b>5</b></td><td>[VALUE: 0]</td><td>Sehr oft</td></tr>
+<tr class="LEMquestion"><td class="">Q-15</td><td><b>MatrixNDRTsFreitext</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6919/qid/89393">QID 89393</a>]<br>Array (Texts) [;]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p>OPTIONAL</p>
+
+<p>Falls es weitere Tätigkeiten gibt, mit denen Sie sich beschäftigen 
+würden, wenn Sie auf der Autobahn fahren und das System aktiviert ist, 
+geben Sie diese bitte in der Matrix an. Nutzen Sie dafür die 
+Freitextfelder. Ordnen Sie ihre Tätigkeiten entsprechend der angegebenen
+ Häufigkeiten (linke Spalte) ein.</p>
+
+<p>Prüfen Sie bitte vorab, ob diese Tätigkeit sich einer der oben 
+genannten Kategorien zuordnen lassen würde oder ob es eine noch nicht 
+genannte Art von Tätigkeit ist.</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMsubq"><td>SQ-1</td><td><b>MatrixNDRTsFreitext_0</b></td><td>&nbsp;</td><td>Nie</td></tr><tr class="LEMsubq"><td>SQ-2</td><td><b>MatrixNDRTsFreitext_1</b></td><td>&nbsp;</td><td>Sehr selten</td></tr><tr class="LEMsubq"><td>SQ-3</td><td><b>MatrixNDRTsFreitext_2</b></td><td>&nbsp;</td><td>Selten</td></tr><tr class="LEMsubq"><td>SQ-4</td><td><b>MatrixNDRTsFreitext_3</b></td><td>&nbsp;</td><td>Gelegentlich</td></tr><tr class="LEMsubq"><td>SQ-5</td><td><b>MatrixNDRTsFreitext_4</b></td><td>&nbsp;</td><td>Oft</td></tr><tr class="LEMsubq"><td>SQ-6</td><td><b>MatrixNDRTsFreitext_5</b></td><td>&nbsp;</td><td>Sehr oft</td></tr><tr class="LEManswer"><td>A[1]-1</td><td><b>SQ001</b></td><td>[VALUE: SQ001]</td><td></td></tr>
+<tr class="LEMgroup"><td class="">G-6</td><td><b>Abschluss</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/688159/gid/6920">GID 6920</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>&nbsp;</td></tr>
+<tr class="LEMquestion"><td class="">Q-16</td><td><b>DefGesamtsystem5</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6920/qid/89397">QID 89397</a>]<br>Text display [X]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Beachten
+ Sie bitte, dass die folgenden Fragen sich nicht&nbsp;auf das 
+Gesamtfahrzeug (Fahrzeugabmessungen, PS/Motorisierung, Design, Bedienung
+ Klimaanlage etc.) beziehen.&nbsp;Sofern nicht anders spezifiziert, 
+beinhaltet der Begriff System folgendes:</span></span></span></span></p>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Das System umfasst das Fahrerassistenzsystem “Level 2 automatisiertes Fahren“.<br>Hierin eingeschlossen sind folgende Komponenten:</span></span></span></span></p>
+
+<ul>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsverhalten:</span></span></span></span>
+
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Spurhaltung, Beschleunigungsverhalten, Abstand zu anderen Verkehrsteilnehmern etc.</span></span></span></span></li>
+	</ul>
+	</li>
+	<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Anzeige-Bedienkonzept:</span></span></span></span>
+	<ul>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bedienelemente zur De- und Aktivierung sowie Einstellungen des Fahrerassistenzsystems</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">das Fahrerassistenzsystem betreffende Anzeigen, Töne, Lichtsignale etc.</span></span></span></span></li>
+		<li style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Funktionsweise
+ und -prinzipien des Fahrerassistenzsystems wie die Häufigkeit oder der 
+Anlass für Hinweise, Warnungen, Anzeigen etc.</span></span></span></span></li>
+	</ul>
+	</li>
+</ul>
+
+<p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Bewerten Sie&nbsp;</span></span><span style="font-family:Arial, sans-serif;">hier
+ nur die Umsetzung des soeben erlebten Fahrerassistenzsystems. Der Fokus
+ liegt also nicht darauf, wie sinnvoll Sie automatisiertes Fahren im 
+Allgemeinen finden.</span></span></span></p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-17</td><td><b><span class="mandatory">*</span>SubjUeberwachguete</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6920/qid/89386">QID 89386</a>]<br>Array [F]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>Wie aufmerksam haben Sie die Systemleistung überwacht, wenn Sie L2 aktiviert hatten?<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMsubq"><td>SQ-1</td><td><b>SubjUeberwachguete_1</b></td><td>&nbsp;</td><td></td></tr><tr class="LEManswer"><td>A[0]-1</td><td><b>0</b></td><td>[VALUE: 0]</td><td>Unaufmerksam</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>1</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-3</td><td><b>2</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-4</td><td><b>3</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-5</td><td><b>4</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-6</td><td><b>5</b></td><td>[VALUE: 0]</td><td></td></tr>
+<tr class="LEManswer"><td>A[0]-7</td><td><b>6</b></td><td>[VALUE: 0]</td><td>Stets aufmerksam</td></tr>
+<tr class="LEMquestion"><td class="">Q-18</td><td><b><span class="mandatory">*</span>SubjEinflussSetting</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6920/qid/89387">QID 89387</a>]<br>List (Radio) [L]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p style="margin-bottom:11px;"><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Hätten Sie sich anders verhalten, wenn Sie die letzte Fahrt nicht im Rahmen einer Studie durchgeführt hätten?<br>Z.B. Beschäftigung mit fahrfremden Tätigkeiten oder Ähnliches?</span></span></span></span></p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>fix_height</td><td>200</td></tr>
+<tr><td>horizontal_scroll</td><td>0</td></tr>
+<tr><td>keep_aspect</td><td>0</td></tr>
+<tr><td>crop_or_resize</td><td>0</td></tr>
+<tr><td>other_position</td><td>default</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEManswer"><td>A[0]-1</td><td><b>0</b></td><td>[VALUE: 0]</td><td>Ja</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>1</b></td><td>[VALUE: 0]</td><td>Nein</td></tr>
+<tr class="LEMquestion"><td class="">Q-19</td><td><b><span class="mandatory">*</span>SubjEinflussSettKomm</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6920/qid/89400">QID 89400</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">(((<span data-original-title="" title=""> ! </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6920/qid/89387" data-original-title="[java688159X6920X89387][G:6][Q:18]: &lt;p style=&quot;margin-bottom:11px&quot;&gt;&lt;span style=&quot;font-size:11pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Hätten Sie sich anders verhalten, wenn Sie die letzte Fahrt nicht im Rahmen einer Studie durchgeführt hätten?&lt;br /&gt;Z.B. Beschäftigung mit fahrfremden Tätigkeiten oder Ähnliches?&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; ; ,'answers':{  '0~0':'0|Ja','0~1':'0|Nein' }">SubjEinflussSetting.NAOK</a>)<span data-original-title="" title=""> &amp;&amp; </span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6920/qid/89387" data-original-title="[java688159X6920X89387][G:6][Q:18]: &lt;p style=&quot;margin-bottom:11px&quot;&gt;&lt;span style=&quot;font-size:11pt&quot;&gt;&lt;span style=&quot;line-height:107%&quot;&gt;&lt;span style=&quot;font-family:Calibri,sans-serif&quot;&gt;&lt;span style=&quot;font-family:&amp;quot;Arial&amp;quot;,sans-serif&quot;&gt;Hätten Sie sich anders verhalten, wenn Sie die letzte Fahrt nicht im Rahmen einer Studie durchgeführt hätten?&lt;br /&gt;Z.B. Beschäftigung mit fahrfremden Tätigkeiten oder Ähnliches?&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt; ; ,'answers':{  '0~0':'0|Ja','0~1':'0|Nein' }">SubjEinflussSetting.NAOK</a><span data-original-title="" title=""> == </span>0))))</span></td><td><p><span style="font-size:11pt;"><span style="line-height:107%;"><span style="font-family:Calibri, sans-serif;"><span style="font-family:Arial, sans-serif;">Sie haben die vorige Frage mit "ja" beantwortet. Bitte beschreiben Sie kurz, inwiefern Sie sich anders verhalten hätten.</span></span></span></span></p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>Y</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-20</td><td><b>Kommentare</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6920/qid/89383">QID 89383</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p>OPTIONAL</p>
+
+<p>Haben Sie Kommentare zu der heutigen Fahrt bzw. dem erlebten System?</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-21</td><td><b>SonstKommentare</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/688159/gid/6920/qid/89392">QID 89392</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p>OPTIONAL</p>
+
+<p>Haben Sie sonstige Kommentare oder Anmerkungen zur Studie?</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table></div><script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/lstutorial.js"></script>
+<script type="text/javascript" src="H-off-Nachbefragung_survey_logic_file-Dateien/expression.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery('body').popover({'selector':'a\x5Brel\x3Dpopover\x5D'});
+jQuery('body').tooltip({'selector':'a\x5Brel\x3Dtooltip\x5D'});
+/*]]>*/
+</script>
+</body></html>

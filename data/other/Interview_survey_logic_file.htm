@@ -1,0 +1,378 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/yiistrap.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/bootstrap-switch.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/select2.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/select2-bootstrap.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/bootstrap-datetimepicker.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/roboto.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/icomoon.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/lstutorial.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/adminbasics.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/adminsidepanel.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/lime-admin-colors.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/statistics.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/expressions.css">
+<link rel="stylesheet" type="text/css" href="Interview_survey_logic_file-Dateien/expressionlogicfile.css">
+<script type="text/javascript">window.debugState = {frontend : (0 === 1), backend : (0 === 1)};</script><script type="text/javascript" src="Interview_survey_logic_file-Dateien/jquery-3.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/jquery-migrate-3.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/jquery-ui.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/adminsidepanel.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/js.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/bootstrap.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/bootstrapconfirm.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/moment-with-locales.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/select2.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/lslog.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/pjax.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/ckeditor_002.js" class="headScriptTag"></script><script type="text/javascript" src="Interview_survey_logic_file-Dateien/loader.js"></script><script src="Interview_survey_logic_file-Dateien/event_002.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/editor_basic.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/env.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/ckeditor_basic.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/log.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/dom.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/tools.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/dtd.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/event.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/domobject.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/node_002.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/window.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/document.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/nodelist.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/element_002.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/documentfragment.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/walker.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/range.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/iterator.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/command.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/ckeditor_base.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/config.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/filter_002.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/focusmanager.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/keystrokehandler.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/lang.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/scriptloader.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/resourcemanager.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/plugins.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/ui.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/editor.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/htmlparser.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/basicwriter.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/node.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/comment.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/text_002.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/cdata.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/fragment.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/filter.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/htmldataprocessor.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/element.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/template.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/ckeditor.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/inline.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/themedui.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/editable.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/selection.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/style.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/promise.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/optimization.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/color.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/comment_002.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/elementpath.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/text.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/rangelist.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/skin.js" type="text/javascript"></script><script src="Interview_survey_logic_file-Dateien/_bootstrap.js" type="text/javascript"></script><style>.cke{visibility:hidden;}</style>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/config_002.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/ckeditoradditions.js" class="headScriptTag"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/em_javascript.js" class="headScriptTag"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+
+           window.LS = window.LS || {}; window.LS.globalUserId = "111";
+/*]]>*/
+</script>
+</head><body><script type="text/javascript" src="Interview_survey_logic_file-Dateien/bootstrap-switch.js"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/bootstrap-datetimepicker.js"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/adminbasics.js"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/modaleditor.js"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/decimal.js"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/decimalcustom.js"></script>
+<style>
+           @page { 
+               size: landscape;
+           }
+            @media print { 
+                html {width: 670px; white-space: pre-wrap; overflow: visible;}
+                body {width: 100%; white-space: pre-wrap; overflow: visible; font-size: 12pt;}
+                table { overflow: visible !important; }
+                div { overflow: visible !important; }
+                * { overflow: visible !important; }
+                
+            }
+           </style><p class="LEMheading alert alert-success">Keine Syntaxfehler in dieser Umfrage festgestellt.</p>
+<div id="showlogicfilediv" class="table-responsive"><h3>Logikdatei für die Umfrage #[326281]: FOT Interview</h3>
+<table id="logicfiletable" class="table table-bordered"><tbody><tr>
+            <th class="column-0">#</th>
+            <th class="column-1">Name [ID]</th>
+            <th class="column-2">Bedingung [Validierung] (Standardwert)</th>
+            <th class="column-3">Text [Hilfe] (Hinweis)</th>
+            </tr>
+<tr class="LEMgroup"><td class="">G-0</td><td><b>Metadaten</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/326281/gid/6913">GID 6913</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>&nbsp;</td></tr>
+<tr class="LEMquestion"><td class="">Q-0</td><td><b><span class="mandatory">*</span>VP</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89369">QID 89369</a>]<br>Numerical input [N]  </td><td><span class="em-expression" data-original-title="" title="">1</span><hr>(VALIDATION: <span class="em-expression" data-original-title="" title="">((<span title="" class="em-function" data-original-title="Herausfinden, ob eine Variable eine Nummer oder eine nummerische Zeichenkette ist; bool is_numeric(var)">is_numeric</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89369" data-original-title="[java326281X6913X89369][G:0][Q:0]: &lt;p&gt;VP-Nummer&lt;/p&gt;">VP.NAOK</a>)<span data-original-title="" title=""> || </span><span title="" class="em-function" data-original-title="Bestimmen, ob eine Variable als leer betrachtet wird; bool is_empty(var)">is_empty</span>(<a title="" class="em-var-after em-var-inpage" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89369" data-original-title="[java326281X6913X89369][G:0][Q:0]: &lt;p&gt;VP-Nummer&lt;/p&gt;">VP.NAOK</a>)))</span>)</td><td><p>VP-Nummer</p>
+<hr>[Hilfetext: <p>A: 1-50</p>
+
+<p>B: 51-100</p>
+]<hr>(Hinweis: 
+    <span></span>
+   In dieses Feld dürfen nur Zahlen eingegeben werden.
+
+)<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>text_input_width</td><td>3</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-1</td><td><b><span class="mandatory">*</span>Fahrt</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370">QID 89370</a>]<br>List (Radio) [L]  </td><td><span class="em-expression" data-original-title="" title="">1</span><hr>(VALIDATION: <span class="em-expression" data-original-title="" title="">(1)</span>)</td><td>Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;<hr>(Hinweis: 
+    <span></span>
+   Bitte wählen Sie eine der folgenden Antworten:
+
+)<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>fix_height</td><td>200</td></tr>
+<tr><td>horizontal_scroll</td><td>0</td></tr>
+<tr><td>keep_aspect</td><td>0</td></tr>
+<tr><td>crop_or_resize</td><td>0</td></tr>
+<tr><td>other_position</td><td>default</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEManswer"><td>A[0]-1</td><td><b>A1</b></td><td>[VALUE: 0]</td><td>Gruppe A - Termin 2: H-on</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>A2</b></td><td>[VALUE: 0]</td><td>Gruppe A - Termin 2: H-off</td></tr>
+<tr class="LEManswer"><td>A[0]-3</td><td><b>B</b></td><td>[VALUE: 0]</td><td>Gruppe B (H-off)</td></tr>
+<tr class="LEMgroup"><td class="">G-1</td><td><b>VL-Protokoll</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/326281/gid/6928">GID 6928</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>&nbsp;</td></tr>
+<tr class="LEMquestion"><td class="">Q-2</td><td><b>AOnVP</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6928/qid/90140">QID 90140</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">((<a title="" class="em-var-after" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370" data-original-title="[java326281X6913X89370][G:0][Q:1]: Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;; ,'answers':{  '0~A1':'0|Gruppe A - Termin 2: H-on','0~A2':'0|Gruppe A - Termin 2: H-off','0~B':'0|Gruppe B (H-off)' }">Fahrt.NAOK</a><span data-original-title="" title=""> == </span><span class="em-var-string" data-original-title="" title="">'A2'</span>))</span></td><td><p><strong>Gruppe A - Termin 2: H-on</strong></p>
+
+<p>Anmerkungen zum Probanden, z.B. während Einweisung oder Fahrt</p>
+
+<p>(VL-Protokoll Termin A-1)</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-3</td><td><b>AOnFzg</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6928/qid/90144">QID 90144</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">((<a title="" class="em-var-after" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370" data-original-title="[java326281X6913X89370][G:0][Q:1]: Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;; ,'answers':{  '0~A1':'0|Gruppe A - Termin 2: H-on','0~A2':'0|Gruppe A - Termin 2: H-off','0~B':'0|Gruppe B (H-off)' }">Fahrt.NAOK</a><span data-original-title="" title=""> == </span><span class="em-var-string" data-original-title="" title="">'A2'</span>))</span></td><td><p><strong>Gruppe A - Termin 2: H-on</strong></p>
+
+<p>Anmerkungen zum Fahrzeug, z.B. Abwurf ohne Grund, Fehlermeldung, ...<br>(VL-Protokoll Termin A-1)</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-4</td><td><b>AOffVP</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6928/qid/90141">QID 90141</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">((<a title="" class="em-var-after" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370" data-original-title="[java326281X6913X89370][G:0][Q:1]: Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;; ,'answers':{  '0~A1':'0|Gruppe A - Termin 2: H-on','0~A2':'0|Gruppe A - Termin 2: H-off','0~B':'0|Gruppe B (H-off)' }">Fahrt.NAOK</a><span data-original-title="" title=""> == </span><span class="em-var-string" data-original-title="" title="">'A2'</span>))</span></td><td><p><strong>Gruppe A - Termin 2: H-off</strong></p>
+
+<p>Anmerkungen zum Probanden, z.B. während Einweisung oder Fahrt</p>
+<hr>[Hilfetext: In der Eingewöhnungsfahrt: Kürzel (E) verwenden;<br>In der Versuchsfahrt: Kürzel (V) verwenden]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-5</td><td><b>AOffFzg</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6928/qid/90145">QID 90145</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">((<a title="" class="em-var-after" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370" data-original-title="[java326281X6913X89370][G:0][Q:1]: Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;; ,'answers':{  '0~A1':'0|Gruppe A - Termin 2: H-on','0~A2':'0|Gruppe A - Termin 2: H-off','0~B':'0|Gruppe B (H-off)' }">Fahrt.NAOK</a><span data-original-title="" title=""> == </span><span class="em-var-string" data-original-title="" title="">'A2'</span>))</span></td><td><p><strong>Gruppe A - Termin 2: H-off</strong></p>
+
+<p>Anmerkungen zum Fahrzeug, z.B. Abwurf ohne Grund, Fehlermeldung, ...</p>
+<hr>[Hilfetext: In der Eingewöhnungsfahrt: Kürzel (E) verwenden;<br>In der Versuchsfahrt: Kürzel (V) verwenden]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-6</td><td><b>BOffVP</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6928/qid/90142">QID 90142</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">((<a title="" class="em-var-after" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370" data-original-title="[java326281X6913X89370][G:0][Q:1]: Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;; ,'answers':{  '0~A1':'0|Gruppe A - Termin 2: H-on','0~A2':'0|Gruppe A - Termin 2: H-off','0~B':'0|Gruppe B (H-off)' }">Fahrt.NAOK</a><span data-original-title="" title=""> == </span><span class="em-var-string" data-original-title="" title="">"B"</span>))</span></td><td><p><strong>Gruppe B (H-off)</strong></p>
+
+<p>Anmerkungen zum Probanden, z.B. während Einweisung oder Fahrt</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>Y</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-7</td><td><b>BOffFzg</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6928/qid/90146">QID 90146</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">((<a title="" class="em-var-after" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370" data-original-title="[java326281X6913X89370][G:0][Q:1]: Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;; ,'answers':{  '0~A1':'0|Gruppe A - Termin 2: H-on','0~A2':'0|Gruppe A - Termin 2: H-off','0~B':'0|Gruppe B (H-off)' }">Fahrt.NAOK</a><span data-original-title="" title=""> == </span><span class="em-var-string" data-original-title="" title="">"B"</span>))</span></td><td><p><strong>Gruppe B (H-off)</strong></p>
+
+<p>Anmerkungen zum Fahrzeug, z.B. Abwurf ohne Grund, Fehlermeldung, ...</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>Y</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-8</td><td><b>VLProtSonst</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6928/qid/90143">QID 90143</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p>Sonstige Anmerkungen</p>
+
+<p style="color:#FF0000;">kurze Notiz zu den Wetterbedingungen und zum Zustand der Straße machen:<br>- Wetter: z.B. hell, bewölkt oder dämmrig, blauer Himmel oder ....<br>- Straße: nass, feucht, schneebedeckt, trocken, ...</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>Y</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMgroup"><td class="">G-2</td><td><b>Leitfaden</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionGroupsAdministration/view/surveyid/326281/gid/6914">GID 6914</a>] </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><em>Diese
+ Fragen dienen als grober Interviewleitfaden zu den Erfahrungen und 
+Bewertungen des Probanden bei der Nutzung von L2. Die Durchführung ist 
+stark abhängig von den Antworten der Probanden, im Zweifel sollte 
+unbedingt genauer nachgefragt werden.&nbsp;<br>Die Antworten sollten in die passenden Freitextfelder geschrieben werden.</em></p>
+
+<p>&nbsp;</p>
+
+<p>Ich möchte Ihnen nun einige Fragen zu der erlebten Fahrt mit dem 
+System L2 stellen. In diesen Fragen haben Sie die Möglichkeit, noch 
+einmal über verschiedene erlebte Situationen oder Aspekte des 
+Automationssystems zu sprechen, um uns ein besseres Verständnis Ihrer 
+Erfahrungen mit dem System zu geben&nbsp;</p>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-9</td><td><b>Trigger</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/89371">QID 89371</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>Trigger</strong></p>
+
+<p>Haben Sie während der Fahrt den Triggerknopf gedrückt? Bitte führen 
+Sie noch einmal aus, was Ihnen in diesem Moment aufgefallen ist, bzw. 
+was sie uns mitteilen möchten.</p>
+<hr>[Hilfetext: Kategorien
+<p>- Besondere Vorkommnisse, z.B. kritische Situationen</p>
+
+<p>- Auffälligkeiten, z.B. überraschendes Systemverhalten</p>
+
+<p>- Bewertungen des Systemverhaltens in einer bestimmten Situation</p>
+]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-10</td><td><b>FahrerTrans</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/89373">QID 89373</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>Fahrerinitiierte Transitionen</strong></p>
+
+<p>Während der Autobahnfahrten sind Sie einen Großteil der Zeit mit L2 
+gefahren. In verschiedenen Situationen - zum Beispiel beim Auffahren auf
+ oder Abfahren von Autobahnen - haben Sie das System aktiviert oder 
+deaktiviert, um damit in einen anderen Fahrmodus wechseln.<br>Gab es hierbei Situationen oder Aspekte, über die Sie uns gerne mehr erzählen würden?</p>
+<hr>[Hilfetext: <p>Beispiele</p>
+
+<p>- System hat anders reagiert als erwartet</p>
+
+<p>- Gewünschte Transition konnte nicht wie geplant ausgeführt werden</p>
+
+<p>- Es kam zu kritischen Situaitonen&nbsp;</p>
+
+<p>- Die Anzeige oder Bedienung wurde als besonders gut oder schlecht empfunden / nicht verstanden</p>
+
+<p>- Es kam im Laufe der Systemnutzung zu einer deutlichen Änderung der Bedienung/Bewertung&nbsp;</p>
+]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-11</td><td><b>SystemTrans</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/89374">QID 89374</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>Systeminitiierte Transitionen</strong></p>
+
+<p>Während der Autobahnfahrten sind Sie einen Großteil der Zeit mit L2 
+gefahren. In verschiedenen Situationen hat das System von sich L2 
+teilweise oder komplett deaktiviert oder Sie zu einer Übernahme 
+aufgefordert.</p>
+
+<p>Gab es hierbei Situationen, über die Sie uns gerne mehr erzählen würden?</p>
+<hr>[Hilfetext: <p>Beispiele</p>
+
+<p>- Systemwechsel waren zu häufig und daher nervig</p>
+
+<p>- Fahrer wusste nicht, in welchem Modus er sich befindet bzw. was gerade seine Aufgaben sind.</p>
+
+<p>- Fahrer hat Systemwechsel nicht bemerkt oder nicht verstanden</p>
+
+<p>- Es kam zu kritischen Situaitonen&nbsp;</p>
+]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-12</td><td><b>DMS</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/89375">QID 89375</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>DMS</strong></p>
+
+<p>Wenn L2 aktiv war, gab es ein Fahrerbeobachtungssystem, das gewarnt hat, wenn Sie</p>
+
+<ul>
+	<li>ON --&gt; die Hände zu lange vom Lenkrad genommen haben.<br>oder</li>
+	<li>OFF --&gt; zu lange von der Straße weggesehen haben.</li>
+</ul>
+
+<p>Möchten Sie dieses Fahrerbeobachtungssystem noch einmal genauer 
+kommentieren oder bewerten oder Ihre Erlebnisse mit dem 
+Fahrerbeobachtungssystem beschreiben?&nbsp;</p>
+<hr>[Hilfetext: <p>Beispiele</p>
+
+<p>- Fahrer verstand nicht, warum Warnung ausgegeben wurde</p>
+
+<p>- Fahrer hat versucht, Fahrerbeobachtungssystem "auszutricksen"</p>
+
+<p>- Fahrer empfand Fahrerbeobrachtungssystem als nervig</p>
+]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-13</td><td><b>HMI</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/89376">QID 89376</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>HMI</strong></p>
+
+<p>Für die Bedienung von L2 haben Sie verschiedene Tasten am Lenkrad 
+verwendet. Je nach Systemzustand wurden Ihnen im Anschluss 
+unterschiedliche Anzeigen im Kombi-Display (oder dem Head-up Display) 
+angezeigt.</p>
+
+<p>Möchten Sie allgemein die Bedienung des L2 Systems oder die 
+verwendeten Anzeigen noch einmal genauer kommentieren&nbsp;bzw. 
+bewerten?</p>
+<hr>[Hilfetext: <p>Beispiele</p>
+
+<p>- Eingaben hatten nicht den gewünschten Effekt&nbsp;</p>
+
+<p>- Die Bedeutung der verschiedenen Symbole bzw. deren Aussage über den Systemzustand war nicht klar</p>
+
+<p>- Bedienschritte waren zu komplex</p>
+
+<p>- Anzeige war zu überladen</p>
+]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-14</td><td><b>Systemverhalten</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/89377">QID 89377</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>Systemverhalten</strong></p>
+
+<p>Während der Nutzung von L2 haben Sie die aktive Spurführung, die 
+Geschwindigkeitskontrolle, das Halten des Abstandes und die Interaktion 
+mit anderen Verkehrsteilnehmern in&nbsp;verschiedenen Situationen 
+erlebt.</p>
+
+<p>Möchten Sie dieses Fahrverhalten des Systems noch einmal genauer kommentieren bzw. bewerten oder Ihre Erlebnisse beschreiben?</p>
+<hr>[Hilfetext: <p>Beispiele</p>
+
+<p>- Bremsverhalten zu ruckig</p>
+
+<p>- Es kam zu kritischen Situationen</p>
+
+<p>- Einmal wurde ein einscherendes Fahrzeug nicht erkannt</p>
+
+<p>- Fahrer wünscht, das System würde den Spurwechsel selbst ausführen</p>
+]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-15</td><td><b><span class="mandatory">*</span>L2PrivNutzung</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/91906">QID 91906</a>]<br>List (Radio) [L]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>Bewertung L2</strong></p>
+
+<p>In diesem Versuch konnten Sie Erfahrungen mit L2 sammeln. Würden Sie dies auch gern in Ihrem privaten Fahrzeug nutzen?</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>fix_height</td><td>200</td></tr>
+<tr><td>horizontal_scroll</td><td>0</td></tr>
+<tr><td>keep_aspect</td><td>0</td></tr>
+<tr><td>crop_or_resize</td><td>0</td></tr>
+<tr><td>display_columns</td><td>5</td></tr>
+<tr><td>other_position</td><td>default</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEManswer"><td>A[0]-1</td><td><b>0</b></td><td>[VALUE: 0]</td><td>Nein</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>1</b></td><td>[VALUE: 0]</td><td>Eher nein</td></tr>
+<tr class="LEManswer"><td>A[0]-3</td><td><b>2</b></td><td>[VALUE: 0]</td><td>Unsicher</td></tr>
+<tr class="LEManswer"><td>A[0]-4</td><td><b>3</b></td><td>[VALUE: 0]</td><td>Eher ja</td></tr>
+<tr class="LEManswer"><td>A[0]-5</td><td><b>4</b></td><td>[VALUE: 0]</td><td>Ja</td></tr>
+<tr class="LEMquestion"><td class="">Q-16</td><td><b><span class="mandatory">*</span>L2Komponenten</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/91903">QID 91903</a>]<br>Array [F]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>Bewertung L2</strong></p>
+
+<p>Welche Komponente von L2 würden Sie auch gern in Ihrem privaten Fahrzeug nutzen?</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMsubq"><td>SQ-1</td><td><b>L2Komponenten_Laengs</b></td><td>&nbsp;</td><td>Längsführung/ACC</td></tr><tr class="LEMsubq"><td>SQ-2</td><td><b>L2Komponenten_Quer</b></td><td>&nbsp;</td><td>Querführung/Spurhaltung/Lenken</td></tr><tr class="LEMsubq"><td>SQ-3</td><td><b>L2Komponenten_Hoff</b></td><td>&nbsp;</td><td><em>nur für A-2 &amp; B beantwortbar</em><br><br>H-off/Hände frei nutzen können</td></tr><tr class="LEManswer"><td>A[0]-1</td><td><b>0</b></td><td>[VALUE: 0]</td><td>Nein</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>1</b></td><td>[VALUE: 0]</td><td>Eher nein</td></tr>
+<tr class="LEManswer"><td>A[0]-3</td><td><b>2</b></td><td>[VALUE: 0]</td><td>Unsicher</td></tr>
+<tr class="LEManswer"><td>A[0]-4</td><td><b>3</b></td><td>[VALUE: 0]</td><td>Eher ja</td></tr>
+<tr class="LEManswer"><td>A[0]-5</td><td><b>4</b></td><td>[VALUE: 0]</td><td>Ja</td></tr>
+<tr class="LEManswer"><td>A[0]-6</td><td><b>99</b></td><td>[VALUE: 0]</td><td>nicht anwendbar [Spalte nur für A-2 H-On Interview &amp; Frage 3]</td></tr>
+<tr class="LEMquestion"><td class="">Q-17</td><td><b><span class="mandatory">*</span>Ranking</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/91932">QID 91932</a>]<br>List (Radio) [L]  </td><td><span class="em-expression" data-original-title="" title="">((<a title="" class="em-var-after" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370" data-original-title="[java326281X6913X89370][G:0][Q:1]: Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;; ,'answers':{  '0~A1':'0|Gruppe A - Termin 2: H-on','0~A2':'0|Gruppe A - Termin 2: H-off','0~B':'0|Gruppe B (H-off)' }">Fahrt.NAOK</a><span data-original-title="" title=""> == </span><span class="em-var-string" data-original-title="" title="">'A2'</span>))</span></td><td><p><strong>Bewertung L2</strong></p>
+
+<p>Stellen Sie sich vor, Ihr privates Fahrzeug wird mit einem L2 System ausgestattet.<br>Hätten Sie lieber die Variante H-on oder die Variante H-off?</p>
+<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>fix_height</td><td>200</td></tr>
+<tr><td>horizontal_scroll</td><td>0</td></tr>
+<tr><td>keep_aspect</td><td>0</td></tr>
+<tr><td>crop_or_resize</td><td>0</td></tr>
+<tr><td>other_position</td><td>default</td></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEManswer"><td>A[0]-1</td><td><b>1</b></td><td>[VALUE: 0]</td><td>H-on</td></tr>
+<tr class="LEManswer"><td>A[0]-2</td><td><b>2</b></td><td>[VALUE: 0]</td><td>H-off</td></tr>
+<tr class="LEMquestion"><td class="">Q-18</td><td><b>L2BewertungKomm</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/91902">QID 91902</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td><p><strong>Bewertung L2</strong></p>
+Anmerkungen zu den vorigen Fragen/Antworten vom Probanden zur L2-Bewertung.<hr>[Hilfetext: <p>Beispiele</p>
+
+<p>- Option H-off haben ist gut, nutzen würde ich eher H-on</p>
+
+<p>- finde die ACC super hilfreich, lenken ist nicht so wichtig</p>
+]<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-19</td><td><b>Sonstiges</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/89372">QID 89372</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">1</span></td><td>Haben Sie noch weitere Kommentare oder Anmerkungen zu der erlebten Fahrt mit L2?<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+<tr class="LEMquestion"><td class="">Q-20</td><td><b>Studie</b><br>[<a target="_blank" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6914/qid/89378">QID 89378</a>]<br>Long free text [T]  </td><td><span class="em-expression" data-original-title="" title="">((<a title="" class="em-var-after" href="https://survey.lfe.mw.tum.de/index.php/questionAdministration/view/surveyid/326281/gid/6913/qid/89370" data-original-title="[java326281X6913X89370][G:0][Q:1]: Gib an, zu welcher Fahrt dieses Interview geführt wird&nbsp;; ,'answers':{  '0~A1':'0|Gruppe A - Termin 2: H-on','0~A2':'0|Gruppe A - Termin 2: H-off','0~B':'0|Gruppe B (H-off)' }">Fahrt.NAOK</a><span data-original-title="" title=""> != </span><span class="em-var-string" data-original-title="" title="">"A1"</span>))</span></td><td>Haben Sie noch weitere Kommentare oder Anmerkungen zu der Studie?<table class="logicfileattributetable"><tbody><tr><th>Fragenattribut</th><th>Wert</th></tr>
+<tr><td>clear_default</td><td>N</td></tr>
+<tr><td>save_as_default</td><td>N</td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table></div><script type="text/javascript" src="Interview_survey_logic_file-Dateien/lstutorial.js"></script>
+<script type="text/javascript" src="Interview_survey_logic_file-Dateien/expression.js"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+jQuery('body').popover({'selector':'a\x5Brel\x3Dpopover\x5D'});
+jQuery('body').tooltip({'selector':'a\x5Brel\x3Dtooltip\x5D'});
+/*]]>*/
+</script>
+</body></html>
