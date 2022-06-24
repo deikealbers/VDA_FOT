@@ -56,7 +56,7 @@
 "L2Komponenten.Quer.","A_on_fc",0,NA,NA,NA,Inf,-Inf,"0: 0, 1: 0, 2: 0, 3: 0"
 "L2Komponenten.Quer.","B_off",29,3.34,1.14,4,0,4,"4: 19, 3: 6, 1: 3, 0: 1"
 "L2Komponenten.Hoff.","A_off",29,2.59,1.38,3,0,4,"3: 10, 4: 9, 1: 5, 0: 3"
-"L2Komponenten.Hoff.","A_on_fam",29,95.66,18.01,99,2,99,"99: 28, 2: 1, 0: 0, 1: 0"
+"L2Komponenten.Hoff.","A_on_fam",0,NA,NA,NA,Inf,-Inf,"0: 0, 1: 0, 2: 0, 3: 0"
 "L2Komponenten.Hoff.","A_on_fc",0,NA,NA,NA,Inf,-Inf,"0: 0, 1: 0, 2: 0, 3: 0"
 "L2Komponenten.Hoff.","B_off",29,3.17,1.28,4,0,4,"4: 19, 1: 4, 2: 3, 3: 2"
 "Ranking","A_off",27,1.74,0.45,2,1,2,"2: 20, 1: 7"

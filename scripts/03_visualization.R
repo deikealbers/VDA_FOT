@@ -56,7 +56,9 @@ vorbefragung <- vorbefragung %>%
   mutate(StreckeAutobahn = factor(StreckeAutobahn, levels = c("0", "1", "2", "3", "4", "5"), ordered = TRUE)) %>%
   mutate(across(starts_with("KenntnisAS."), ~factor(., levels = c("0", "1", "2", "3"), ordered = TRUE)))
 
+
 ################## post questionnaire ###############################################################
+
 #### plot TiA overall + subscales ####
 TiA_overall <- nachbefragung %>%
   select(interval, VPNr, TiA_overall) %>%
@@ -299,7 +301,7 @@ plot_SystemUnderstanding <- ggplot(nachbefragung, aes(x = interval, y=100 * Syst
   geom_violin(fill = "#DAD7CB") +
   stat_summary(fun = mean, geom="point",colour="black", size=1) +
   stat_summary(fun.data = fun_mean, geom="text", vjust=-.55, size=3.3) +
-  labs(y="Percentage correct answers", x="",
+  labs(y="Correct answers [%]", x="",
        title = "System understanding") +
   theme_bw() +
   theme(text=element_text(family = "sans", color="black", size=12),
@@ -324,7 +326,7 @@ plot_SystemUnderstanding_singleQ <- ggplot(SystemUnderstanding_singleQ_means, ae
   geom_point() +
   stat_summary(fun = mean, geom="point",colour="black", size=1) +
   stat_summary(fun.data = fun_mean, geom="text", vjust=1.8, size=3.3) +
-  labs(y="Percentage correct answers", x="",
+  labs(y="Correct answers [%]", x="",
        title = "System understanding - single questions") +
   facet_grid(interval ~.) +
   ylim(0, 100) +
@@ -354,7 +356,7 @@ plot_monitoring <- ggplot(nachbefragung, aes(x = SubjUeberwachguete.1.)) +
   facet_grid(~interval) +
   xlim(-0.5,6.5) +
   scale_x_discrete(limit = c("0", "1", "2", "3", "4", "5", "6"), labels = labels_monitoring) + # NA removed
-  labs(y="", x="",
+  labs(y="n", x="",
        title = "Subjective rating of monitoring performance") +
   geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
   theme_bw() +
@@ -382,7 +384,7 @@ plot_setting <- ggplot(nachbefragung, aes(x = SubjEinflussSetting)) +
   xlim(-0.5,1.5) +
   ylim(0, 27) +
   scale_x_discrete(limit = c("0", "1"), labels = labels_setting) + # NA removed
-  labs(y="", x="",
+  labs(y="n", x="",
        title = "Subjective assessment of the influence of the experimental setting on behavior") +
   geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
   theme_bw() +
@@ -412,7 +414,7 @@ plot_ranking <- ggplot(nachbefragung_Aoff, aes(x = Ranking)) +
   geom_bar(fill = "#DAD7CB", color = "black") +
   xlim(-0.5,1.5) +
   scale_x_discrete(limit = c("1", "2"), labels = labels_ranking) + # NA removed
-  labs(y="", x="",
+  labs(y="n", x="",
        title = "A_off: Preferred L2 system") +
   geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
   theme_bw() +
@@ -434,13 +436,15 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                          "plot_setting", 
                          "plot_ranking")))
 
+
 ################## sample characteristics ###########################################################
+
 #### plot age ####
 plot_age <- ggplot(vorbefragung, aes(x = group, y=Alter)) +
   geom_violin(fill = "#DAD7CB") +
   stat_summary(fun = mean, geom="point",colour="black", size=1) +
   stat_summary(fun.data = fun_mean, geom="text", vjust=-.55, size=3.3) +
-  labs(y="years", x="",
+  labs(y="Age in years", x="",
        title = "Age") +
   theme_bw() +
   ylim(18, 80) +
@@ -468,7 +472,7 @@ plot_license <- ggplot(vorbefragung, aes(x = group, y=Fuehrerschein)) +
   geom_violin(fill = "#DAD7CB") +
   stat_summary(fun = mean, geom="point",colour="black", size=1) +
   stat_summary(fun.data = fun_mean, geom="text", vjust=-.55, size=3.3) +
-  labs(y="year", x="",
+  labs(y="Year", x="",
        title = "Year - obtainment of driver's license") +
   theme_bw() +
   ylim(1960, 2020) +
@@ -572,7 +576,7 @@ plot_ATIS <- ggplot(vorbefragung, aes(x = group, y=ATIS)) +
   geom_violin(fill = "#DAD7CB") +
   stat_summary(fun = mean, geom="point",colour="black", size=1) +
   stat_summary(fun.data = fun_mean, geom="text", vjust=-.55, size=3.3) +
-  labs(y="score", x="",
+  labs(y="Score", x="",
        title = "Affinity for Technology Interaction Scale") +
   theme_bw() +
   ylim(1, 6) +
@@ -620,14 +624,14 @@ plot_frequency <- ggplot(frequency, aes(x = score)) +
   facet_grid(scale~group) +
   ylim(0,25) +
   scale_x_discrete(limit = c("0", "1", "2", "3", "4"), labels = labels_frequency) + # NA removed
-  labs(y="", x="",
+  labs(y="n", x="",
        title = "Frequency - general & on highway") +
   geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
   theme_bw() +
   theme(text=element_text(family = "sans", color="black", size=12),
         panel.grid.minor.y = element_blank(), 
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=30, vjust=1, hjust=0.9))
+        axis.text.x=element_text(color = "black", size=10, angle=35, vjust=1, hjust=0.9))
 plot_frequency
 
 ggsave(filename = "data/results/figures/Frequency.png", plot_frequency, 
@@ -648,7 +652,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_frequency", "frequency")))
 
 #### plot mileage ####
-labels_mileage <- c("0", "1 km - 5.000 km", "5.001 km - 20.000 km", "20.001 km - 50.000 km", 
+labels_mileage <- c("0 km", "1 km - 5.000 km", "5.001 km - 20.000 km", "20.001 km - 50.000 km", 
                     "50.001 km - 100.000 km", "> 100.000 km")
 
 mileage_general <- vorbefragung %>%
@@ -669,7 +673,7 @@ plot_mileage <- ggplot(mileage, aes(x = score)) +
   facet_grid(scale~group) +
   ylim(0,25) +
   scale_x_discrete(limit = c("0", "1", "2", "3", "4", "5"), labels = labels_mileage) + # NA removed
-  labs(y="", x="",
+  labs(y="n", x="",
        title = "Mileage - general & on highway") +
   geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
   theme_bw() +
@@ -738,7 +742,7 @@ plot_ADAS <- ggplot(ADAS, aes(x = score)) +
   facet_grid(scale~group) +
   ylim(0,25) +
   scale_x_discrete(limit = c("0", "1", "2", "3"), labels = labels_ADAS) + # NA removed | limit = c("0", "1", "2", "3", "4", "5", "6"), 
-  labs(y="", x="",
+  labs(y="n", x="",
        title = "Familiarity with driver assistance systems") +
   geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
   theme_bw() +
@@ -767,7 +771,10 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_mileage", "mileage", 
                           "plot_ADAS", "ADAS")))
 
+
+          
 ################## not applied ######################################################################
+
 #### not applied: plot TiA_overall ####
 # plot_TiA_overall <- ggplot(nachbefragung, aes(x=interval, y=TiA_overall, fill=interval)) + 
 #   geom_boxplot() +
