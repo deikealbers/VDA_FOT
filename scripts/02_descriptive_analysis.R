@@ -361,10 +361,11 @@ vor_A1 <- as.data.frame(sapply(vor_A, count1_FOT))
 vor_A2 <- as.data.frame(sapply(vor_A, count2_FOT))
 vor_A3 <- as.data.frame(sapply(vor_A, count3_FOT))
 vor_A4 <- as.data.frame(sapply(vor_A, count4_FOT))
+vor_A5 <- as.data.frame(sapply(vor_A, count5_FOT))
 vor_An <- as.data.frame(sapply(vor_A, notemptycount_FOT))
 
-vor_freq_A <- data.frame(vor_An, vor_A0, vor_A1, vor_A2, vor_A3, vor_A4) %>%
-  setNames(., c("n", "0", "1", "2", "3", "4")) %>%
+vor_freq_A <- data.frame(vor_An, vor_A0, vor_A1, vor_A2, vor_A3, vor_A4, vor_A5) %>%
+  setNames(., c("n", "0", "1", "2", "3", "4", "5")) %>%
   add_column(group = "A", variable = vor_variables, .before = "n")
 
 ## B
@@ -377,10 +378,11 @@ vor_B1 <- as.data.frame(sapply(vor_B, count1_FOT))
 vor_B2 <- as.data.frame(sapply(vor_B, count2_FOT))
 vor_B3 <- as.data.frame(sapply(vor_B, count3_FOT))
 vor_B4 <- as.data.frame(sapply(vor_B, count4_FOT))
+vor_B5 <- as.data.frame(sapply(vor_B, count5_FOT))
 vor_Bn <- as.data.frame(sapply(vor_B, notemptycount_FOT))
 
-vor_freq_B <- data.frame(vor_Bn, vor_B0, vor_B1, vor_B2, vor_B3, vor_B4) %>%
-  setNames(., c("n", "0", "1", "2", "3", "4")) %>%
+vor_freq_B <- data.frame(vor_Bn, vor_B0, vor_B1, vor_B2, vor_B3, vor_B4, vor_B5) %>%
+  setNames(., c("n", "0", "1", "2", "3", "4", "5")) %>%
   add_column(group = "B", variable = vor_variables, .before = "n")
 
 ## combine A & B
