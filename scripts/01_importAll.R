@@ -241,7 +241,27 @@ nachbefragung_rec <- nachbefragung_complete %>%
   add_column(System13 = ifelse(.$Systemverstaendnis.13. == SU13, 1, ifelse(.$Systemverstaendnis.1. == 2, NA, 0)), .before = "Systemverstaendnis.1.") %>%
   add_column(System14 = ifelse(.$Systemverstaendnis.14. == SU14, 1, ifelse(.$Systemverstaendnis.1. == 2, NA, 0)), .before = "Systemverstaendnis.1.") %>%
   add_column(System15 = ifelse(.$Systemverstaendnis.15. == SU15, 1, ifelse(.$Systemverstaendnis.1. == 2, NA, 0)), .before = "Systemverstaendnis.1.") %>%
-  add_column(System16 = ifelse(.$Systemverstaendnis.16. == SU16, 1, ifelse(.$Systemverstaendnis.1. == 2, NA, 0)), .before = "Systemverstaendnis.1.")
+  add_column(System16 = ifelse(.$Systemverstaendnis.16. == SU16, 1, ifelse(.$Systemverstaendnis.1. == 2, NA, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_01 = ifelse(.$Systemverstaendnis.1. == 2, 2, # statement is correct for On, wrong for off
+                                  ifelse((.$Systemverstaendnis.1. == SU01_on & .$interval == "A_on_fc") | (.$Systemverstaendnis.1. == SU01_on & .$interval == "A_on_fam"), 1, 
+                                         ifelse((.$Systemverstaendnis.1. == SU01_off  & .$interval == "A_off") | (.$Systemverstaendnis.1. == SU01_off & .$interval == "B_off"), 1, 
+                                                0))), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_02 = ifelse(.$Systemverstaendnis.2. == SU02, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_03 = ifelse(.$Systemverstaendnis.3. == SU03, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_04 = ifelse(.$Systemverstaendnis.4. == SU04, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_05 = ifelse(.$Systemverstaendnis.5. == SU05, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_06 = ifelse(.$Systemverstaendnis.6. == SU06, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_07 = ifelse(.$Systemverstaendnis.7. == SU07, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_08 = ifelse(.$Systemverstaendnis.8. == SU08, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_09 = ifelse(.$Systemverstaendnis.9. == SU09, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_10 = ifelse(.$Systemverstaendnis.10. == SU10, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_11 = ifelse(.$Systemverstaendnis.11. == SU11, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_12 = ifelse(.$Systemverstaendnis.12. == SU12, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_13 = ifelse(.$Systemverstaendnis.13. == SU13, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_14 = ifelse(.$Systemverstaendnis.14. == SU14, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_15 = ifelse(.$Systemverstaendnis.15. == SU15, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.") %>%
+  add_column(System_u_16 = ifelse(.$Systemverstaendnis.16. == SU16, 1, ifelse(.$Systemverstaendnis.1. == 2, 2, 0)), .before = "Systemverstaendnis.1.")
+  
 
 nachbefragung_scores <- nachbefragung_rec %>%
   rowwise() %>% 

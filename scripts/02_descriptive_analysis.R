@@ -396,7 +396,11 @@ nach_variables = c("NDRTs.NDRT1.", "NDRTs.NDRT2.", "NDRTs.NDRT3.", "NDRTs.NDRT4.
                    "SubjUeberwachguete.1.", "SubjEinflussSetting",
                    "L2PrivNutzung", "L2Komponenten.Laengs.",
                    "L2Komponenten.Quer.", "L2Komponenten.Hoff.",
-                   "Ranking")
+                   "Ranking", 
+                   "System_u_01", "System_u_02", "System_u_03", "System_u_04",
+                   "System_u_05", "System_u_06", "System_u_07", "System_u_08",
+                   "System_u_09", "System_u_10", "System_u_11", "System_u_12",
+                   "System_u_13", "System_u_14", "System_u_15", "System_u_16")
 
 ## A_on_fc
 nach_Aonfc <- nachbefragung %>%
