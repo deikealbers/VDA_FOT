@@ -6,6 +6,7 @@ library(ggplot2)
 library(dplyr)
 library(rstatix)
 library(skimr)
+library(grid)
 
 # library(ggpubr)
 # library(reshape2)
@@ -19,16 +20,21 @@ mean_FOT = function(x) mean(x, na.rm = TRUE)
 FOT_skim <- skim_with(numeric = sfl(mean = mean_FOT), append = FALSE)
 
 #### notes on colors ####
-## Sekundaerfarben
-#005293 --- dunkelblau
-#64A0C8 --- mittelblau
-#98C6EA --- hellblau
-#999999 --- grau
+#                 L2H-on RGB	  Hex	      L2H-off	RGB	  Hex	      L0/L1/neutral	RGB	Hex
+#   Primärfarbe		255, 192, 0	  #FFC000		91, 155, 213	#5B9BD5		231, 230, 230	    #E7E6E6
+# 1. Abstufung		255, 217, 102	#FFD966		155, 194, 230	#9BC2E6		208, 206, 206	    #D0CECE
+# 2. Abstufung		255, 230, 153	#FFE699		189, 215, 238	#BDD7EE		174, 170, 170	    #AEAAAA
+# 3. Abstufung		255, 242, 204	#FFF2CC		221, 235, 247	#DDEBF7		117, 113, 113	    #757171
 
-## Akzentfarben
-#E37222 --- orange
-#A2AD00 --- gruen
-#DAD7CB --- taupe
+# FOT colors:
+# A H-off 			 "#9BC2E6"
+# B H-off			  "#5B9BD5"
+# A H-on (fc)		"#FFC000"
+# A H-on (fam)	"#FFD966"
+# 
+# Neutral/A:		"#E7E6E6"
+# overall/B:		"#AEAAAA"
+
 
 #### write function for summary stats ####
 fun_mean <- function(x){ return(data.frame(y=mean(x),label=round(mean(x,na.rm=T), 2)))}
@@ -43,23 +49,28 @@ nachbefragung <- read.csv("data/preprocessed/nachbefragung_scores.csv", encoding
 nachbefragung <- nachbefragung %>%
   rename(group = X.U.FEFF.group) %>%
   mutate(group = factor(group, levels = c("A", "B"), ordered = TRUE)) %>%
-  mutate(interval = factor(interval, levels = c("A_on_fc", "A_on_fam", "A_off", "B_off"), ordered = TRUE)) %>%
-  mutate(SubjUeberwachguete.1. = factor(SubjUeberwachguete.1., ordered = TRUE)) %>%
+  mutate(interval = ifelse(interval == "A_on_fc", "A H-on (fc)", 
+                        ifelse(interval == "A_on_fam", "A H-on (fam)",
+                               ifelse(interval == "A_off", "A H-off",
+                                      ifelse(interval == "B_off", "B H-off", "OTHER"))))) %>%
+  mutate(interval = factor(interval, levels = c("A H-on (fc)", "A H-on (fam)", "A H-off", "B H-off"), ordered = TRUE)) %>%
+  # mutate(SubjUeberwachguete.1. = factor(SubjUeberwachguete.1., ordered = TRUE)) %>%
   mutate(SubjEinflussSetting = factor(SubjEinflussSetting, ordered = TRUE)) %>%
   mutate(Ranking = factor(Ranking, ordered = TRUE))
 
 vorbefragung <- vorbefragung %>%
-  rename(group = X.U.FEFF.group) %>%
-  mutate(Fahrtfrequenz = factor(Fahrtfrequenz, levels = c("0", "1", "2", "3", "4"), ordered = TRUE)) %>%
-  mutate(Fahrtstrecke = factor(Fahrtstrecke, levels = c("0", "1", "2", "3", "4", "5"), ordered = TRUE)) %>%
-  mutate(FrequenzAutobahn = factor(FrequenzAutobahn, levels = c("0", "1", "2", "3", "4"), ordered = TRUE)) %>%
-  mutate(StreckeAutobahn = factor(StreckeAutobahn, levels = c("0", "1", "2", "3", "4", "5"), ordered = TRUE)) %>%
-  mutate(across(starts_with("KenntnisAS."), ~factor(., levels = c("0", "1", "2", "3"), ordered = TRUE)))
+  rename(group = X.U.FEFF.group) # %>%
+  # mutate(Fahrtfrequenz = factor(Fahrtfrequenz, levels = c("0", "1", "2", "3", "4"), ordered = TRUE)) %>%
+  # mutate(Fahrtstrecke = factor(Fahrtstrecke, levels = c("0", "1", "2", "3", "4", "5"), ordered = TRUE)) %>%
+  # mutate(FrequenzAutobahn = factor(FrequenzAutobahn, levels = c("0", "1", "2", "3", "4"), ordered = TRUE)) %>%
+  # mutate(StreckeAutobahn = factor(StreckeAutobahn, levels = c("0", "1", "2", "3", "4", "5"), ordered = TRUE)) %>%
+  # mutate(across(starts_with("KenntnisAS."), ~factor(., levels = c("0", "1", "2", "3"), ordered = TRUE)))
 
 
 ################## post questionnaire ###############################################################
 
 #### plot TiA overall + subscales ####
+## subset TiA overall + subscales ##
 TiA_overall <- nachbefragung %>%
   select(interval, VPNr, TiA_overall) %>%
   rename(score = TiA_overall) %>%
@@ -88,37 +99,93 @@ TiA_TiA <- nachbefragung %>%
   select(interval, VPNr, TiA_TiA) %>%
   rename(score = TiA_TiA) %>%
   add_column(scale = "TiA_TiA", .after = "VPNr")
-
+## build subset ##
 TiA <- bind_rows(TiA_overall, TiA_RC, TiA_UP, TiA_F, TiA_IoD, TiA_PtT, TiA_TiA) %>%
   mutate(scale = factor(scale, levels = c("TiA_overall", "TiA_RC", "TiA_UP", "TiA_F", "TiA_IoD", "TiA_PtT", "TiA_TiA"), ordered = TRUE))
-
+## labels ##
 labels_TiA = c("Overall", "Reliability/Competence", "Understanding/Predictability", 
                "Familiarity", "Intention of Developers", "Propensity to Trust", "Trust in Automation")
 
-plot_TiA_all_scales <- ggplot(TiA, aes(x=scale, y=score, fill=scale)) + 
-  geom_violin() +
+## basic plot ##
+p <- ggplot(TiA, aes(x=scale, y=score, fill=scale)) + 
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
   ylim(1, 5) +
-  stat_summary(fun = median, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_median, geom="text", vjust=-.55, size=3.3) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
   scale_x_discrete(labels= labels_TiA) +
   facet_wrap(~interval) +
-  scale_fill_manual(values = c("#999999", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB")) +
-  labs(y="Score", x="",
-       title = "Trust in Automation - overall score & subscales") +
+  scale_fill_manual(values = c("#AEAAAA", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+  labs(y="Score", x="") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=30, vjust=.8, hjust=0.8))
-plot_TiA_all_scales
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", size=9, angle=30, vjust=.88, hjust=0.8, face = "plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
+## basic plot ##
+p <- ggplot(TiA, aes(x=scale, y=score, fill=scale)) + 
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  ylim(1, 5) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_x_discrete(labels= labels_TiA) +
+  facet_wrap(~interval) +
+  scale_fill_manual(values = c("#AEAAAA", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+  labs(y="Score", x="") +
+  theme_bw() +
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
+        panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
+        legend.position = "none", 
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", size=9, angle=30, vjust=.88, hjust=0.8, face = "plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#9BC2E6","#5B9BD5","#FFC000","#FFD966")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
 
-ggsave(filename = "data/results/figures/TiA.png", plot_TiA_all_scales, 
-       dpi = 300, width = 8, height = 5, units = "in", device='png')
+plot_TiA_all_scales <- g
+ggsave(filename = "data/results/figures/new/TiA_new.png", plot_TiA_all_scales , 
+       dpi = 500, width = 8, height = 5, units = "in", device='png', bg = "transparent")
 
+## remove not needed data ##
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA")))
 
 #### plot CTAM subscales ####
+## subset subscales ##
 CTAM_PE <- nachbefragung %>%
   select(interval, VPNr, CTAM_PE) %>%
   rename(score = CTAM_PE) %>%
@@ -143,38 +210,75 @@ CTAM_PS <- nachbefragung %>%
   select(interval, VPNr, CTAM_PS) %>%
   rename(score = CTAM_PS) %>%
   add_column(scale = "CTAM_PS", .after = "VPNr")
-
+## build subset ##
 CTAM <- bind_rows(CTAM_PE, CTAM_EE, CTAM_ATT, CTAM_FC, CTAM_ITU, CTAM_PS) %>%
   mutate(scale = factor(scale, levels = c("CTAM_PE", "CTAM_EE", "CTAM_ATT", "CTAM_FC", "CTAM_ITU", "CTAM_PS"), ordered = TRUE))
+## lables ##
+labels_CTAM = c("Performance\nExpectancy", "Effort Expectancy", "Attitude towards\nusing Technology", 
+                "Facilitating Conditions", "Behavioral Intention \nto use the System", "Perceived Safety")
 
-labels_CTAM = c("Performance \n Expectancy", "Effort Expectancy", "Attitude towards \n using Technology", 
-                "Facilitating Conditions", "Behavioral Intention  \n to use the System", "Perceived Safety")
-
-plot_CTAM_all_scales <- ggplot(CTAM, aes(x=scale, y=score, fill=scale)) + 
-  geom_violin() +
-  ylim(1, 7) +
-  stat_summary(fun = median, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_median, geom="text", vjust=1.40, size=3.3) +
-  scale_x_discrete(labels= labels_CTAM) +
+## basic plot ##
+p <- ggplot(CTAM, aes(x=scale, y=score, fill=scale)) + 
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_x_discrete(labels = labels_CTAM) +
+  scale_y_continuous(limits = c(1,7), breaks = seq(1,7,1)) +
   facet_wrap(~interval) +
-  scale_fill_manual(values = c("#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB")) +
-  labs(y="Score", x="",
-       title = "Car Technology Acceptance Model - subscales") +
+  scale_fill_manual(values = c("#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+  labs(y="Score", x="") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=30, vjust=.9, hjust=0.8))
-plot_CTAM_all_scales
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", size=9, angle=30, vjust=.88, hjust=0.8, face = "plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
+p
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#9BC2E6","#5B9BD5","#FFC000","#FFD966")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
 
-ggsave(filename = "data/results/figures/CTAM.png", plot_CTAM_all_scales, 
-       dpi = 300, units = "in", width = 8, height = 5, device='png')
+plot_CTAM_all_scales <- g
+ggsave(filename = "data/results/figures/new/CTAM_new.png", g, 
+       dpi = 500, width = 8, height = 5, units = "in", device='png', bg = "transparent")
 
+## remove not needed data ##
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
                           "plot_CTAM_all_scales", "CTAM")))
 
 #### plot NDRTs ####
+## subsets ##
 NDRT_1 <- nachbefragung %>%
   select(interval, VPNr, NDRTs.NDRT1.) %>%
   rename(score = NDRTs.NDRT1.) %>%
@@ -207,89 +311,163 @@ NDRT_8 <- nachbefragung %>%
   select(interval, VPNr, NDRTs.NDRT8.) %>%
   rename(score = NDRTs.NDRT8.) %>%
   add_column(scale = "NDRT_8", .after = "VPNr")
-
+##  build subset ##
 NDRT <- bind_rows(NDRT_1, NDRT_2, NDRT_3, NDRT_4, NDRT_5, NDRT_6, NDRT_7, NDRT_8) %>%
   mutate(scale = factor(scale, levels = c("NDRT_1", "NDRT_2", "NDRT_3", "NDRT_4", "NDRT_5", "NDRT_6", "NDRT_7", "NDRT_8"), ordered = TRUE))
-
-labels_NDRT = c("Mobile device \n in hand - handling", "Mobile device \n in hand - talking", 
-                "Mobile device \n fixated - speaking", "Vehicle related inputs",
+## lables
+labels_NDRT = c("Mobile device\nin hand - handling", "Mobile device\nin hand - talking", 
+                "Mobile device\nfixated - speaking", "Vehicle related inputs",
                 "Eating/drinking/smoking", "Grooming", 
-                "Interaction with passengers", "Searching/grabbing/rummaging")
+                "Interaction with passengers", "Searching/grabbing/\nrummaging")
 
-plot_NDRT_all_scales <- ggplot(NDRT, aes(x=scale, y=score, fill=scale)) + 
-  geom_violin() +
-  ylim(0, 5) +
-  stat_summary(fun = median, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_median, geom="text", vjust=-.55, size=3.3) +
-  scale_x_discrete(labels= labels_NDRT) +
+## basic plot ##
+p <- ggplot(NDRT, aes(x=scale, y=score, fill=scale)) + 
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_x_discrete(labels = labels_NDRT) +
+  scale_y_continuous(limits = c(0,5), breaks = seq(0,5,1), 
+                     labels = c("never", "very rarely", "rarely", "occasionally", "often", "very often")) +
   facet_wrap(~interval) +
-  scale_fill_manual(values = c("#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB")) +
-  labs(y="Score", x="",
-       title = "Non-driving related tasks") +
+  scale_fill_manual(values = c("#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+  labs(y="Score", x="") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=45, vjust=.85, hjust=0.8))
-plot_NDRT_all_scales
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", size=9, angle=40, vjust=.88, hjust=0.8, face = "plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
+p
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#9BC2E6","#5B9BD5","#FFC000","#FFD966")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
 
-ggsave(filename = "data/results/figures/NDRT.png", plot_NDRT_all_scales, 
-       dpi = 300, units = "in", width = 8, height = 5, device='png')
+plot_NDRT_all_scales <- g
+ggsave(filename = "data/results/figures/new/NDRT_new.png", g, 
+       dpi = 500, width = 9, height = 5.5, units = "in", device='png', bg = "transparent")
 
+## remove not needed data ##
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
                           "plot_CTAM_all_scales", "CTAM",
                           "plot_NDRT_all_scales", "NDRT")))
 
 #### plot L2components ####
+## subsets ##
 L2u_gen <- nachbefragung %>%
-  filter(interval != "A_on_fc") %>%
+  filter(interval != "A H-on (fc)") %>%
   select(interval, VPNr, L2PrivNutzung) %>%
   rename(score = L2PrivNutzung) %>%
   add_column(scale = "L2u_gen", .after = "VPNr")
 L2u_long <- nachbefragung %>%
-  filter(interval != "A_on_fc") %>%
+  filter(interval != "A H-on (fc)") %>%
   select(interval, VPNr, L2Komponenten.Laengs.) %>%
   rename(score = L2Komponenten.Laengs.) %>%
   add_column(scale = "L2u_long", .after = "VPNr")
 L2u_lat <- nachbefragung %>%
-  filter(interval != "A_on_fc") %>%
+  filter(interval != "A H-on (fc)") %>%
   select(interval, VPNr, L2Komponenten.Quer.) %>%
   rename(score = L2Komponenten.Quer.) %>%
   add_column(scale = "L2u_lat", .after = "VPNr")
 L2u_hoff <- nachbefragung %>%
-  filter(interval != "A_on_fc") %>%
+  filter(interval != "A H-on (fc)") %>%
   select(interval, VPNr, L2Komponenten.Hoff.) %>%
   rename(score = L2Komponenten.Hoff.) %>%
   add_column(scale = "L2u_hoff", .after = "VPNr")
-
+## build subsets ##
 L2compo <- bind_rows(L2u_gen, L2u_long, L2u_lat, L2u_hoff) %>%
   mutate(scale = factor(scale, levels = c("L2u_gen", "L2u_long", "L2u_lat", "L2u_hoff"), 
                         ordered = TRUE))
-
+## lables ##
 labels_L2compo = c("overall", "longitudinal", 
                    "lateral", "h-off")
 
-plot_L2components <- ggplot(L2compo, aes(x=scale, y=score, fill=scale)) + 
-  geom_violin() +
-  ylim(0, 4) +
-  stat_summary(fun = median, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_median, geom="text", vjust=1.2, size=3.3) +
-  scale_x_discrete(labels= labels_L2compo) +
+## basic plot ##
+p <- ggplot(L2compo, aes(x=scale, y=score, fill=scale)) + 
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_x_discrete(labels = labels_L2compo) +
+  scale_y_continuous(limits = c(0,4), breaks = seq(0,4,1), 
+                     labels = c("no", "rather no", "uncertain", "rather yes", "yes")) +
   facet_wrap(~interval) +
-  scale_fill_manual(values = c("#999999", "#DAD7CB", "#DAD7CB", "#DAD7CB")) +
-  labs(y="Score", x="",
-       title = "L2 intention to use - overall & specific components") +
+  scale_fill_manual(values = c("#AEAAAA", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+  labs(y="Score", x="") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=30, vjust=.8, hjust=0.8))
-plot_L2components
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", size=9, angle=40, vjust=.88, hjust=0.8, face = "plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
+p
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#FFD966", "#9BC2E6","#5B9BD5")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
 
-ggsave(filename = "data/results/figures/L2components.png", plot_L2components, 
-       dpi = 300, units = "in", width = 8, height = 3, device='png')
-
+plot_L2components_all_scales <- g
+ggsave(filename = "data/results/figures/new/L2components_new.png", g, 
+       dpi = 500, width = 8, height = 3, units = "in", device='png', bg = "transparent")
+## remove not needed data ##
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
                           "plot_CTAM_all_scales", "CTAM",
@@ -297,22 +475,35 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_L2components", "L2compo")))
 
 #### plot system understanding ####
-plot_SystemUnderstanding <- ggplot(nachbefragung, aes(x = interval, y=100 * System_sum)) +
-  geom_violin(fill = "#DAD7CB") +
-  stat_summary(fun = mean, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_mean, geom="text", vjust=-.55, size=3.3) +
-  labs(y="Correct answers [%]", x="",
-       title = "System understanding") +
+plot_SystemUnderstanding <- ggplot(nachbefragung, aes(x = interval, y=100 * System_sum, fill = interval)) +
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_y_continuous(limits = c(0,100), breaks = seq(0,100,50)) +
+  scale_fill_manual(values = c("#FFC000","#FFD966", "#9BC2E6","#5B9BD5")) +
+  labs(y="Correct answers [%]") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
-        panel.grid.minor.y = element_blank(), 
-        legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=0, vjust=.8, hjust=0.8))
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
+        panel.grid.major.x = element_blank(),
+        legend.position = "bottom", 
+        legend.title = element_blank(),
+        legend.text = element_text(family = "sans", color="black", size=11, face = "plain"),
+        legend.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_SystemUnderstanding
 
-ggsave(filename = "data/results/figures/SystemUnderstanding.png", plot_SystemUnderstanding, 
-       dpi = 300, units = "in", width = 4, height = 3, device='png')
+ggsave(filename = "data/results/figures/new/SystemUnderstanding_new.png", plot_SystemUnderstanding, 
+       dpi = 500, width = 5, height = 3, units = "in", device='png', bg = "transparent")
 
+#### plot System Understanding - single questions ####
+## build subset ##
 SystemUnderstanding_singleQ_means <- nachbefragung %>%
   select(interval, starts_with("System0"), starts_with("System1")) %>%
   group_by(interval) %>%
@@ -321,24 +512,67 @@ SystemUnderstanding_singleQ_means <- nachbefragung %>%
   rename(question = skim_variable) %>%
   rename(mean = numeric.mean)
 
-plot_SystemUnderstanding_singleQ <- ggplot(SystemUnderstanding_singleQ_means, aes(x = question, y=mean*100)) +
+## basic plot ##
+p <- ggplot(SystemUnderstanding_singleQ_means, aes(x = question, y=mean*100)) +
   geom_line(aes(group = interval)) +
   geom_point() +
   stat_summary(fun = mean, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_mean, geom="text", vjust=1.8, size=3.3) +
-  labs(y="Correct answers [%]", x="",
-       title = "System understanding - single questions") +
+  stat_summary(fun.data = fun_mean, geom="text", vjust=1.8, size=3.1) +
+  labs(y="Correct answers [%]") +
   facet_grid(interval ~.) +
-  ylim(0, 100) +
+  scale_y_continuous(limits = c(0,100), breaks = seq(0,100,50)) +
+  scale_x_discrete(labels= c("Question 1", "Question 2", "Question 3", "Question 4",
+                             "Question 5", "Question 6", "Question 7", "Question 8",
+                             "Question 9", "Question 10", "Question 11", "Question 12",
+                             "Question 13", "Question 14", "Question 15", "Question 16")) +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
-        panel.grid.minor.y = element_blank(), 
+  theme(text=element_text(family = "sans", color="black", size=11, face="bold"),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
+        panel.grid.major.x = element_blank(),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=30, vjust=.8, hjust=0.8))
-plot_SystemUnderstanding_singleQ
+        legend.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.title.x=element_blank(),
+        axis.text.x=element_text(color = "black", size=9, angle=30, vjust=.9, hjust=0.8, face="plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
+p
 
-ggsave(filename = "data/results/figures/SystemUnderstanding_singleQ.png", plot_SystemUnderstanding_singleQ, 
-       dpi = 300, units = "in", width = 8, height = 5, device='png')
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#FFC000","#FFD966", "#9BC2E6","#5B9BD5")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
+
+
+plot_SystemUnderstanding_singleQ <- g
+ggsave(filename = "data/results/figures/new/SystemUnderstanding_singleQ.png", plot_SystemUnderstanding_singleQ, 
+       dpi = 500, units = "in", width = 8, height = 5, device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
@@ -349,25 +583,34 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 
 
 #### plot monitoring (subj. ueberwachungsguete) ####
-labels_monitoring <- c("0 - inattentive", "1", "2", "3", "4", "5", "6 - always attentive")
+labels_monitoring <- c("0 -\ninattentive", "1", "2", "3", "4", "5", "6 -\nalways\nattentive")
 
-plot_monitoring <- ggplot(nachbefragung, aes(x = SubjUeberwachguete.1.)) +
-  geom_bar(fill = "#DAD7CB", color = "black") +
-  facet_grid(~interval) +
-  xlim(-0.5,6.5) +
-  scale_x_discrete(limit = c("0", "1", "2", "3", "4", "5", "6"), labels = labels_monitoring) + # NA removed
-  labs(y="n", x="",
-       title = "Subjective rating of monitoring performance") +
-  geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
+plot_monitoring <- ggplot(nachbefragung, aes(x = interval, y=SubjUeberwachguete.1., fill = interval)) +
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_y_continuous(limits = c(0,6), breaks = seq(0,6,1), labels = labels_monitoring) +
+  scale_fill_manual(values = c("#FFC000","#FFD966", "#9BC2E6","#5B9BD5")) +
+  labs(y="Response", x="") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
-        panel.grid.minor.y = element_blank(), 
-        legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=40, vjust=1, hjust=0.9))
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
+        panel.grid.major.x = element_blank(),
+        legend.position = "bottom", 
+        legend.title = element_blank(),
+        legend.text = element_text(family = "sans", color="black", size=11, face = "plain"),
+        legend.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_monitoring
 
-ggsave(filename = "data/results/figures/SubjMonitoringPerformance.png", plot_monitoring, 
-       dpi = 300, units = "in", width = 8, height = 5, device='png')
+ggsave(filename = "data/results/figures/new/SubjMonitoringPerformance_new.png", plot_monitoring, 
+       dpi = 500, width = 5, height = 3, units = "in", device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                          "plot_TiA_all_scales", "TiA",
@@ -378,24 +621,58 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 #### plot influence setting ####
 labels_setting <- c("affected", "not affected")
 
-plot_setting <- ggplot(nachbefragung, aes(x = SubjEinflussSetting)) +
-  geom_bar(fill = "#DAD7CB", color = "black", width = 0.8) +
+p <- ggplot(nachbefragung, aes(x = SubjEinflussSetting)) +
+  geom_bar(fill = "#E7E6E6", color = "black", width = 0.8, size = 0.2) +
   facet_grid(~interval) +
-  xlim(-0.5,1.5) +
-  ylim(0, 27) +
+  ylim(0, 30) +
   scale_x_discrete(limit = c("0", "1"), labels = labels_setting) + # NA removed
-  labs(y="n", x="",
-       title = "Subjective assessment of the influence of the experimental setting on behavior") +
-  geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
+  labs(y="n", x="") +
+  geom_text(size=3.2, stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face="bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=40, vjust=1, hjust=0.9))
-plot_setting
+        legend.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", face="plain", size=9, angle=0, vjust=1),
+        axis.text.y=element_text(color = "black", face="plain", size=9))
+p
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#FFC000","#FFD966", "#9BC2E6","#5B9BD5")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
 
-ggsave(filename = "data/results/figures/SubjInfluenceSetting.png", plot_setting, 
-       dpi = 300, units = "in", width = 8, height = 5, device='png')
+plot_setting <- g
+ggsave(filename = "data/results/figures/new/SubjInfluenceSetting_new.png", g, 
+       dpi = 500, units = "in", width = 8, height = 3, device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                          "plot_TiA_all_scales", "TiA",
@@ -408,24 +685,31 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 labels_ranking <- c("H-on", "H-off")
 
 nachbefragung_Aoff <- nachbefragung %>% # if 
-  filter(interval == "A_off")
+  filter(interval == "A H-off")
 
 plot_ranking <- ggplot(nachbefragung_Aoff, aes(x = Ranking)) +
-  geom_bar(fill = "#DAD7CB", color = "black") +
-  xlim(-0.5,1.5) +
+  geom_bar(fill = "#E7E6E6", color = "black", width = 0.8, size = 0.2) +
   scale_x_discrete(limit = c("1", "2"), labels = labels_ranking) + # NA removed
-  labs(y="n", x="",
-       title = "A_off: Preferred L2 system") +
-  geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
+  ylim(0, 30) +
+  labs(y="n", x="") +
+  geom_text(size=3.2,stat='count', 
+            aes(label=..count..), 
+            position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face="bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=40, vjust=1, hjust=0.9))
+        legend.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", face="plain", size=9, angle=0, vjust=1),
+        axis.text.y=element_text(color = "black", face="plain", size=9))
 plot_ranking
 
-ggsave(filename = "data/results/figures/Ranking.png", plot_ranking, 
-       dpi = 300, units = "in", width = 4, height = 5, device='png')
+ggsave(filename = "data/results/figures/new/Ranking_new.png", plot_ranking,  
+       dpi = 500, units = "in", width = 4, height = 5, device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                          "plot_TiA_all_scales", "TiA",
@@ -440,22 +724,32 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 ################## sample characteristics ###########################################################
 
 #### plot age ####
-plot_age <- ggplot(vorbefragung, aes(x = group, y=Alter)) +
-  geom_violin(fill = "#DAD7CB") +
-  stat_summary(fun = mean, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_mean, geom="text", vjust=-.55, size=3.3) +
-  labs(y="Age in years", x="",
-       title = "Age") +
+plot_age <- ggplot(vorbefragung, aes(x = group, y=Alter, fill = group)) +
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_y_continuous(limits = c(20,80), breaks = seq(20,80,10)) +
+  scale_fill_manual(values = c("#E7E6E6","#AEAAAA")) +
+  labs(y="Age in years") +
   theme_bw() +
-  ylim(18, 80) +
-  theme(text=element_text(family = "sans", color="black", size=12),
-        panel.grid.minor.y = element_blank(), 
-        legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=0, vjust=.8, hjust=0.8))
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
+        panel.grid.major.x = element_blank(),
+        legend.position = "bottom", 
+        legend.title = element_blank(),
+        legend.text = element_text(family = "sans", color="black", size=11, face = "plain"),
+        legend.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_age
 
-ggsave(filename = "data/results/figures/Age.png", plot_age, 
-       dpi = 300, units = "in", width = 4, height = 3, device='png')
+ggsave(filename = "data/results/figures/new/Age_new.png", plot_age, 
+       dpi = 500, width = 3, height = 3, units = "in", device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
@@ -468,22 +762,32 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_age")))
 
 #### plot driver's license ####
-plot_license <- ggplot(vorbefragung, aes(x = group, y=Fuehrerschein)) +
-  geom_violin(fill = "#DAD7CB") +
-  stat_summary(fun = mean, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_mean, geom="text", vjust=-.55, size=3.3) +
-  labs(y="Year", x="",
-       title = "Year - obtainment of driver's license") +
+plot_license <- ggplot(vorbefragung, aes(x = group, y=Fuehrerschein, fill = group)) +
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_y_continuous(limits = c(1960,2020), breaks = seq(1960,2020,10)) +
+  scale_fill_manual(values = c("#E7E6E6","#AEAAAA")) +
+  labs(y="Year - obtainment of driver's license") +
   theme_bw() +
-  ylim(1960, 2020) +
-  theme(text=element_text(family = "sans", color="black", size=12),
-        panel.grid.minor.y = element_blank(), 
-        legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=0, vjust=.8, hjust=0.8))
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
+        panel.grid.major.x = element_blank(),
+        legend.position = "bottom", 
+        legend.title = element_blank(),
+        legend.text = element_text(family = "sans", color="black", size=11, face = "plain"),
+        legend.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_license
 
-ggsave(filename = "data/results/figures/License.png", plot_license, 
-       dpi = 300, units = "in", width = 4, height = 3, device='png')
+ggsave(filename = "data/results/figures/new/License_new.png", plot_license, 
+       dpi = 500, width = 3, height = 4, units = "in", device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
@@ -496,6 +800,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_age", 
                           "plot_license")))
 #### plot DSQ #### 
+## subsets ##
 DSQ_Speed <- vorbefragung %>%
   select(group, VPNr, DSQ_Speed) %>%
   rename(score = DSQ_Speed) %>%
@@ -520,44 +825,80 @@ DSQ_Deviance <- vorbefragung %>%
   select(group, VPNr, DSQ_Deviance) %>%
   rename(score = DSQ_Deviance) %>%
   add_column(scale = "DSQ_Deviance", .after = "VPNr")
-
+## build subset ##
 DSQ <- bind_rows(DSQ_Speed, DSQ_Calmness, DSQ_SocialResistance, DSQ_Focus, DSQ_Planning, DSQ_Deviance) %>%
   mutate(scale = factor(scale, levels = c("DSQ_Speed", "DSQ_Calmness", "DSQ_SocialResistance", "DSQ_Focus", "DSQ_Planning", "DSQ_Deviance"), ordered = TRUE))
-
+## lables ##
 labels_DSQ = c("Speed", "Calmness", "Social Resistance", 
                "Focus", "Planning", "Deviance")
 
-plot_DSQ <- ggplot(DSQ, aes(x=scale, y=score, fill=scale)) + 
-  geom_violin() +
-  ylim(2, 18) +
-  stat_summary(fun = mean, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_mean, geom="text", vjust=1.40, size=3.3) +
-  scale_x_discrete(labels= labels_DSQ) +
+## basic plot ##
+p <- ggplot(DSQ, aes(x=scale, y=score, fill=scale)) + 
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_x_discrete(labels = labels_DSQ) +
+  scale_y_continuous(limits = c(2,18), breaks = seq(2,18,2)) +
   facet_wrap(~group) +
-  scale_fill_manual(values = c("#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB", "#DAD7CB")) +
-  labs(y="Score", x="",
-       title = "Driving Style Questionnaire - subscales") +
+  scale_fill_manual(values = c("#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+  labs(y="Score", x="") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=30, vjust=.9, hjust=0.8)) +
-  geom_segment(aes(x = 0.6, y = 18, xend = 1.4, yend = 18)) + # speed
-  geom_segment(aes(x = 0.6, y = 3, xend = 1.4, yend = 3)) +
-  geom_segment(aes(x = 1.6, y = 18, xend = 2.4, yend = 18)) + # calmness
-  geom_segment(aes(x = 1.6, y = 3, xend = 2.4, yend = 3)) +
-  geom_segment(aes(x = 2.6, y = 12, xend = 3.4, yend = 12)) + # social resistance
-  geom_segment(aes(x = 2.6, y = 2, xend = 3.4, yend = 2)) +
-  geom_segment(aes(x = 3.6, y = 18, xend = 4.4, yend = 18)) + # focus
-  geom_segment(aes(x = 3.6, y = 3, xend = 4.4, yend = 3)) +
-  geom_segment(aes(x = 4.6, y = 12, xend = 5.4, yend = 12)) + # planning
-  geom_segment(aes(x = 4.6, y = 2, xend = 5.4, yend = 2)) +
-  geom_segment(aes(x = 5.6, y = 12, xend = 6.4, yend = 12)) + # deviance
-  geom_segment(aes(x = 5.6, y = 2, xend = 6.4, yend = 2))
-plot_DSQ
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", size=9, angle=20, vjust=.88, hjust=0.8, face = "plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain")) +
+  geom_segment(aes(x = 0.6, y = 18, xend = 1.4, yend = 18), linetype = 2) + # speed
+  geom_segment(aes(x = 0.6, y = 3, xend = 1.4, yend = 3), linetype = 2) +
+  geom_segment(aes(x = 1.6, y = 18, xend = 2.4, yend = 18), linetype = 2) + # calmness
+  geom_segment(aes(x = 1.6, y = 3, xend = 2.4, yend = 3), linetype = 2) +
+  geom_segment(aes(x = 2.6, y = 12, xend = 3.4, yend = 12), linetype = 2) + # social resistance
+  geom_segment(aes(x = 2.6, y = 2, xend = 3.4, yend = 2), linetype = 2) +
+  geom_segment(aes(x = 3.6, y = 18, xend = 4.4, yend = 18), linetype = 2) + # focus
+  geom_segment(aes(x = 3.6, y = 3, xend = 4.4, yend = 3), linetype = 2) +
+  geom_segment(aes(x = 4.6, y = 12, xend = 5.4, yend = 12), linetype = 2) + # planning
+  geom_segment(aes(x = 4.6, y = 2, xend = 5.4, yend = 2), linetype = 2) +
+  geom_segment(aes(x = 5.6, y = 12, xend = 6.4, yend = 12), linetype = 2) + # deviance
+  geom_segment(aes(x = 5.6, y = 2, xend = 6.4, yend = 2), linetype = 2)
+p
 
-ggsave(filename = "data/results/figures/DSQ.png", plot_DSQ, 
-       dpi = 300, units = "in", width = 8, height = 4, device='png')
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#E7E6E6","#AEAAAA")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
+
+plot_DSQ <- g
+ggsave(filename = "data/results/figures/new/DSQ_new.png", g, 
+       dpi = 500, width = 8, height = 3, units = "in", device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
@@ -572,22 +913,32 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_DSQ", "DSQ")))
 
 #### plot ATI-S ####
-plot_ATIS <- ggplot(vorbefragung, aes(x = group, y=ATIS)) +
-  geom_violin(fill = "#DAD7CB") +
-  stat_summary(fun = mean, geom="point",colour="black", size=1) +
-  stat_summary(fun.data = fun_mean, geom="text", vjust=-.55, size=3.3) +
-  labs(y="Score", x="",
-       title = "Affinity for Technology Interaction Scale") +
+plot_ATIS <- ggplot(vorbefragung, aes(x = group, y=ATIS, fill = group)) +
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_y_continuous(limits = c(1,6), breaks = seq(1,6,1)) +
+  scale_fill_manual(values = c("#E7E6E6","#AEAAAA")) +
+  labs(y="Score") +
   theme_bw() +
-  ylim(1, 6) +
-  theme(text=element_text(family = "sans", color="black", size=12),
-        panel.grid.minor.y = element_blank(), 
-        legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=0, vjust=.8, hjust=0.8))
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
+        panel.grid.minor.y = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
+        panel.grid.major.x = element_blank(),
+        legend.position = "bottom", 
+        legend.title = element_blank(),
+        legend.text = element_text(family = "sans", color="black", size=11, face = "plain"),
+        legend.background = element_rect(fill = "transparent"),
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_ATIS
 
-ggsave(filename = "data/results/figures/ATI-S.png", plot_ATIS, 
-       dpi = 300, units = "in", width = 4, height = 3, device='png')
+ggsave(filename = "data/results/figures/new/ATI-S_new.png", plot_ATIS, 
+       dpi = 500, width = 3, height = 3, units = "in", device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
@@ -603,7 +954,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_ATIS")))
 
 #### plot driving frequency ####
-labels_frequency <- c("(seldom or) never", "< 1x/month", "> 1x/month", 
+labels_frequency <- c("(seldom or)\nnever", "< 1x/month", "> 1x/month", 
                       "> 1x/week", "daily")
 
 frequency_general <- vorbefragung %>%
@@ -616,26 +967,63 @@ frequency_highway <- vorbefragung %>%
   rename(score = FrequenzAutobahn) %>%
   add_column(scale = "highway", .after = "VPNr")
 
-frequency <- bind_rows(frequency_general, frequency_highway) %>%
-  mutate(scale = factor(scale, levels = c("general", "highway"), ordered = TRUE))
+frequency <- bind_rows(frequency_general, frequency_highway)#  %>%
+  # mutate(scale = factor(scale, levels = c("general", "highway"), ordered = TRUE))
 
-plot_frequency <- ggplot(frequency, aes(x = score)) +
-  geom_bar(fill = "#DAD7CB", color = "black", width = 0.6) +
-  facet_grid(scale~group) +
-  ylim(0,25) +
-  scale_x_discrete(limit = c("0", "1", "2", "3", "4"), labels = labels_frequency) + # NA removed
-  labs(y="n", x="",
-       title = "Frequency - general & on highway") +
-  geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
-  theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
-        panel.grid.minor.y = element_blank(), 
-        legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=35, vjust=1, hjust=0.9))
-plot_frequency
-
-ggsave(filename = "data/results/figures/Frequency.png", plot_frequency, 
-       dpi = 300, units = "in", width = 6, height = 6, device='png')
+  ## basic plot ##
+  p <- ggplot(frequency, aes(x=scale, y=score, fill=scale)) + 
+    stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+    geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+    stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+    scale_y_continuous(limits = c(0,4), breaks = seq(0,4,1), labels = labels_frequency) +
+    facet_wrap(~group) +
+    scale_fill_manual(values = c("#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+    labs(y="Score", x="") +
+    theme_bw() +
+    theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
+          panel.grid.minor.y = element_blank(), 
+          panel.grid.major.x = element_blank(),
+          panel.grid.major.y = element_line(size = 0.2),
+          legend.position = "none", 
+          plot.background = element_rect(fill = "transparent",
+                                         colour = NA_character_),
+          axis.text.x=element_text(color = "black", size=9, angle=00, vjust=.88, face = "plain"),
+          axis.text.y=element_text(color = "black", size=9, face = "plain"))
+  p
+  ## code of Valentin_Stefan to edit colors of facet boxes: 
+  # https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+  # Generate the ggplot2 plot grob
+  g <- grid.force(ggplotGrob(p))
+  # Get the names of grobs and their gPaths into a data.frame structure
+  grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+  # Build optimal gPaths that will be later used to identify grobs and edit them
+  grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+  grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                              replacement = "", 
+                              x = grobs_df$gPath_full, 
+                              fixed = TRUE)
+  # Get the gPaths of the strip background grobs
+  strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                              x = grobs_df$gPath_full)]
+  strip_bg_gpath[1]
+  strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                               x = grobs_df$gPath_full)]
+  strip_txt_gpath[1] # example of a gPath for strip title
+  ## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+  # Generate some color
+  n_cols <- length(strip_bg_gpath)
+  fills <- c("#E7E6E6","#AEAAAA")
+  # Edit the grobs
+  for (i in 1:length(strip_bg_gpath)){
+    g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+  }
+  # Draw the edited plot
+  grid.newpage(); grid.draw(g)
+  
+  plot_frequency <- g
+  ggsave(filename = "data/results/figures/new/Frequency_new.png", g, 
+         dpi = 500, width = 8, height = 3, units = "in", device='png', bg = "transparent")
+  
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
@@ -652,8 +1040,8 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_frequency", "frequency")))
 
 #### plot mileage ####
-labels_mileage <- c("0 km", "1 km - 5.000 km", "5.001 km - 20.000 km", "20.001 km - 50.000 km", 
-                    "50.001 km - 100.000 km", "> 100.000 km")
+labels_mileage <- c("0 km", "1 km -\n5.000 km", "5.001 km -\n20.000 km", "20.001 km -\n50.000 km", 
+                    "50.001 km -\n100.000 km", "> 100.000 km")
 
 mileage_general <- vorbefragung %>%
   select(group, VPNr, Fahrtstrecke) %>%
@@ -665,26 +1053,62 @@ mileage_highway <- vorbefragung %>%
   rename(score = StreckeAutobahn) %>%
   add_column(scale = "highway", .after = "VPNr")
 
-mileage <- bind_rows(mileage_general, mileage_highway) %>%
-  mutate(scale = factor(scale, levels = c("general", "highway"), ordered = TRUE))
+mileage <- bind_rows(mileage_general, mileage_highway) # %>%
+  # mutate(scale = factor(scale, levels = c("general", "highway"), ordered = TRUE))
 
-plot_mileage <- ggplot(mileage, aes(x = score)) +
-  geom_bar(fill = "#DAD7CB", color = "black", width = 0.6) +
-  facet_grid(scale~group) +
-  ylim(0,25) +
-  scale_x_discrete(limit = c("0", "1", "2", "3", "4", "5"), labels = labels_mileage) + # NA removed
-  labs(y="n", x="",
-       title = "Mileage - general & on highway") +
-  geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
+## basic plot ##
+p <- ggplot(mileage, aes(x=scale, y=score, fill=scale)) + 
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_y_continuous(limits = c(0,5), breaks = seq(0,5,1), labels = labels_mileage) +
+  facet_wrap(~group) +
+  scale_fill_manual(values = c("#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+  labs(y="Score", x="") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=30, vjust=1, hjust=0.9))
-plot_mileage
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", size=9, angle=00, vjust=.88, face = "plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
+p
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#E7E6E6","#AEAAAA")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
 
-ggsave(filename = "data/results/figures/Mileage.png", plot_mileage, 
-       dpi = 300, units = "in", width = 6, height = 6, device='png')
+plot_mileage <- g
+ggsave(filename = "data/results/figures/new/Mileage_new.png", g, 
+       dpi = 500, width = 8, height = 3, units = "in", device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
@@ -702,7 +1126,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_mileage", "mileage")))
 
 #### plot familiarity with ADAS ####
-labels_ADAS <- c("unknown", "known, but never used", "seldomly used", "used regularly")
+labels_ADAS <- c("unknown", "known, but\nnever used", "seldomly\nused", "used\nregularly")
 
 ADAS_CC <- vorbefragung %>%
   select(group, VPNr, KenntnisAS.CC.) %>%
@@ -734,26 +1158,62 @@ ADAS_L2 <- vorbefragung %>%
   rename(score = KenntnisAS.Teilautomation.) %>%
   add_column(scale = "L2", .after = "VPNr")
 
-ADAS <- bind_rows(ADAS_CC, ADAS_ACC, ADAS_LKA, ADAS_TJA, ADAS_PA, ADAS_L2) %>%
-  mutate(scale = factor(scale, levels = c("CC", "ACC", "LKA", "TJA", "PA", "L2"), ordered = TRUE))
+ADAS <- bind_rows(ADAS_CC, ADAS_ACC, ADAS_LKA, ADAS_TJA, ADAS_PA, ADAS_L2)  %>%
+   mutate(scale = factor(scale, levels = c("CC", "ACC", "LKA", "TJA", "PA", "L2"), ordered = TRUE))
 
-plot_ADAS <- ggplot(ADAS, aes(x = score)) +
-  geom_bar(fill = "#DAD7CB", color = "black", width = 0.6) +
-  facet_grid(scale~group) +
-  ylim(0,25) +
-  scale_x_discrete(limit = c("0", "1", "2", "3"), labels = labels_ADAS) + # NA removed | limit = c("0", "1", "2", "3", "4", "5", "6"), 
-  labs(y="n", x="",
-       title = "Familiarity with driver assistance systems") +
-  geom_text(stat='count', aes(label=..count..), position=position_dodge2(width=0.9, preserve=c("single")), vjust=-0.3) +
+## basic plot ##
+p <- ggplot(ADAS, aes(x=scale, y=score, fill=scale)) + 
+  stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
+  geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
+  stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
+  scale_y_continuous(limits = c(0,3), breaks = seq(0,3,1), labels = labels_ADAS) +
+  facet_wrap(~group) +
+  scale_fill_manual(values = c("#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6", "#E7E6E6")) +
+  labs(y="Score", x="") +
   theme_bw() +
-  theme(text=element_text(family = "sans", color="black", size=12),
+  theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
         panel.grid.minor.y = element_blank(), 
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.2),
         legend.position = "none", 
-        axis.text.x=element_text(color = "black", size=10, angle=20, vjust=1, hjust=0.9))
-plot_ADAS
+        plot.background = element_rect(fill = "transparent",
+                                       colour = NA_character_),
+        axis.text.x=element_text(color = "black", size=9, angle=00, vjust=.88, face = "plain"),
+        axis.text.y=element_text(color = "black", size=9, face = "plain"))
+p
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#E7E6E6","#AEAAAA")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
 
-ggsave(filename = "data/results/figures/ADAS.png", plot_ADAS, 
-       dpi = 300, units = "in", width = 5, height = 10, device='png')
+plot_ADAS <- g
+ggsave(filename = "data/results/figures/new/ADAS_new.png", g, 
+       dpi = 500, width = 8, height = 3, units = "in", device='png', bg = "transparent")
 
 rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_median", "mean_FOT", "FOT_skim", 
                           "plot_TiA_all_scales", "TiA",
@@ -781,7 +1241,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 #   theme_bw() +
 #   ylim(1, 5) +
 #   theme(panel.grid.minor.y = element_blank(), legend.position = "bottom") +
-#   scale_fill_manual("interval", values = c("A_on_fc" = "#64A0C8", "A_on_fam" = "#98C6EA", "A_off" = "#999999", "B_off" = "#DAD7CB")) +
+#   scale_fill_manual("interval", values = c("A H-on (fc)" = "#64A0C8", "A H-on (fam)" = "#98C6EA", "A H-off" = "#999999", "B H-off" = "#DAD7CB")) +
 #   labs(y="Score", x="",
 #        title = "TiA_overall") +
 #   stat_summary(fun = mean, geom="point",colour="black", size=2) +
@@ -811,7 +1271,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 #   ylim(1, 5) +
 #   theme(panel.grid.minor.y = element_blank(), legend.position = "bottom") +
 #   facet_wrap(~interval) +
-#   scale_fill_manual("interval", values = c("A_on_fc" = "#64A0C8", "A_on_fam" = "#98C6EA", "A_off" = "#999999", "B_off" = "#DAD7CB")) +
+#   scale_fill_manual("interval", values = c("A H-on (fc)" = "#64A0C8", "A H-on (fam)" = "#98C6EA", "A H-off" = "#999999", "B H-off" = "#DAD7CB")) +
 #   labs(y="Score", x="",
 #        title = "TiA_overall") +
 #   stat_summary(fun = mean, geom="point",colour="black", size=2) +
@@ -828,3 +1288,28 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 #   
 #   color = "interval", palette = "npg"
 # )
+
+
+#### not applied: beginning of visualization of correct and uncertain answers in one plot (SU) ####
+# SU_new <- SystemUnderstanding_singleQ_means %>%
+#   mutate(mean_uncertain = 1 -mean )
+# q <- ggplot(SU_new, aes(x = question)) +
+#   geom_line(aes(group = interval, y = mean*100)) +
+#   geom_line(aes(group = interval, y = mean_uncertain*100)) +
+#   geom_point(aes(group = interval, y = mean_uncertain*100)) +
+#   geom_point(aes(group = interval, y = mean*100)) +
+#   # stat_summary(fun = mean, geom="point",colour="black", size=1) +
+#   # stat_summary(fun.data = fun_mean, geom="text", vjust=1.8, size=3.1) +
+#   labs(y="Correct answers [%]") +
+#   facet_grid(interval ~.) +
+#   ylim(0, 100) +
+#   theme_bw() +
+#   theme(text=element_text(family = "sans", color="black", size=11, face="bold"),
+#         panel.grid.minor.y = element_blank(),
+#         panel.grid.major.x = element_blank(),
+#         legend.position = "none", 
+#         axis.title.x=element_blank(),
+#         axis.ticks.x=element_blank(),
+#         axis.text.x=element_text(color = "black", size=9, angle=30, vjust=.8, hjust=0.8, face="plain"),
+#         axis.text.y=element_text(color = "black", size=9, face = "plain"))
+# q

@@ -136,10 +136,10 @@ rm(list=setdiff(ls(), c("vorbefragung", "nachbefragung", "summ_vorbefragung",
 #     interval
 #     VPNr
 #     DatumFahrt
-# ## not needed variables, n = 99 ##
+# ## not needed variables, n = 115 ##
 #     Vertrauen.TiA... (n = 19)
 #     Akzeptanz... (n = 23)
-#     System... (n = 32)
+#     System... (n = 48)
 #     MatrixNDRTsFreitext... (n = 6)
 #     SubjEinflussSettKomm:Studie (n = 19)
 # ## nominal data, n = 1 ##
@@ -160,13 +160,11 @@ rm(list=setdiff(ls(), c("vorbefragung", "nachbefragung", "summ_vorbefragung",
 #     System_sum
 
 #### subsets nachbefragung ####
-
 nachbefragung <- nachbefragung %>%
   mutate(AutoFahrt = ifelse(AutoFahrt == "On_BMW", "OnBMW", ifelse(AutoFahrt == "On_VW", "OnVW",
                      ifelse(AutoFahrt == "On_Ford", "OnFord", ifelse(AutoFahrt == "On_Porsche", "OnPorsche",
                      ifelse(AutoFahrt == "Off_BMW", "OfBMW", ifelse(AutoFahrt == "Off_Ford", "OfFord",                                                
                                                                      "missing")))))))
-
 
 subset_nach_nominal <- nachbefragung %>%
   select(interval, AutoFahrt) %>%
@@ -224,7 +222,6 @@ summ_nachbefragung <- summary_nachbefragung %>%
   mutate(min = round(min, 0)) %>%
   mutate(max = round(max, 0)) %>%
   relocate(frequencies, .after = "max")
-
 
 #### remove not needed data ####
 rm(list=setdiff(ls(), c("vorbefragung", "nachbefragung", "summ_vorbefragung", "summ_nachbefragung",
