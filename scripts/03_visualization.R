@@ -27,10 +27,10 @@ FOT_skim <- skim_with(numeric = sfl(mean = mean_FOT), append = FALSE)
 # 3. Abstufung		255, 242, 204	#FFF2CC		221, 235, 247	#DDEBF7		117, 113, 113	    #757171
 
 # FOT colors:
-# A H-off 			 "#9BC2E6"
-# B H-off			  "#5B9BD5"
-# A H-on (fc)		"#FFC000"
-# A H-on (fam)	"#FFD966"
+# A L2H-off 			 "#9BC2E6"
+# B L2H-off			  "#5B9BD5"
+# A L2H-on (fc)		"#FFC000"
+# A L2H-on (fam)	"#FFD966"
 # 
 # Neutral/A:		"#E7E6E6"
 # overall/B:		"#AEAAAA"
@@ -49,11 +49,11 @@ nachbefragung <- read.csv("data/preprocessed/nachbefragung_scores.csv", encoding
 nachbefragung <- nachbefragung %>%
   rename(group = X.U.FEFF.group) %>%
   mutate(group = factor(group, levels = c("A", "B"), ordered = TRUE)) %>%
-  mutate(interval = ifelse(interval == "A_on_fc", "A H-on (fc)", 
-                        ifelse(interval == "A_on_fam", "A H-on (fam)",
-                               ifelse(interval == "A_off", "A H-off",
-                                      ifelse(interval == "B_off", "B H-off", "OTHER"))))) %>%
-  mutate(interval = factor(interval, levels = c("A H-on (fc)", "A H-on (fam)", "A H-off", "B H-off"), ordered = TRUE)) %>%
+  mutate(interval = ifelse(interval == "A_on_fc", "A L2H-on (fc)", 
+                        ifelse(interval == "A_on_fam", "A L2H-on (fam)",
+                               ifelse(interval == "A_off", "A L2H-off",
+                                      ifelse(interval == "B_off", "B L2H-off", "OTHER"))))) %>%
+  mutate(interval = factor(interval, levels = c("A L2H-on (fc)", "A L2H-on (fam)", "A L2H-off", "B L2H-off"), ordered = TRUE)) %>%
   # mutate(SubjUeberwachguete.1. = factor(SubjUeberwachguete.1., ordered = TRUE)) %>%
   mutate(SubjEinflussSetting = factor(SubjEinflussSetting, ordered = TRUE)) %>%
   mutate(Ranking = factor(Ranking, ordered = TRUE))
@@ -385,22 +385,22 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 #### plot L2components ####
 ## subsets ##
 L2u_gen <- nachbefragung %>%
-  filter(interval != "A H-on (fc)") %>%
+  filter(interval != "A L2H-on (fc)") %>%
   select(interval, VPNr, L2PrivNutzung) %>%
   rename(score = L2PrivNutzung) %>%
   add_column(scale = "L2u_gen", .after = "VPNr")
 L2u_long <- nachbefragung %>%
-  filter(interval != "A H-on (fc)") %>%
+  filter(interval != "A L2H-on (fc)") %>%
   select(interval, VPNr, L2Komponenten.Laengs.) %>%
   rename(score = L2Komponenten.Laengs.) %>%
   add_column(scale = "L2u_long", .after = "VPNr")
 L2u_lat <- nachbefragung %>%
-  filter(interval != "A H-on (fc)") %>%
+  filter(interval != "A L2H-on (fc)") %>%
   select(interval, VPNr, L2Komponenten.Quer.) %>%
   rename(score = L2Komponenten.Quer.) %>%
   add_column(scale = "L2u_lat", .after = "VPNr")
 L2u_hoff <- nachbefragung %>%
-  filter(interval != "A H-on (fc)") %>%
+  filter(interval != "A L2H-on (fc)") %>%
   select(interval, VPNr, L2Komponenten.Hoff.) %>%
   rename(score = L2Komponenten.Hoff.) %>%
   add_column(scale = "L2u_hoff", .after = "VPNr")
@@ -685,7 +685,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 labels_ranking <- c("H-on", "H-off")
 
 nachbefragung_Aoff <- nachbefragung %>% # if 
-  filter(interval == "A H-off")
+  filter(interval == "A L2H-off")
 
 plot_ranking <- ggplot(nachbefragung_Aoff, aes(x = Ranking)) +
   geom_bar(fill = "#E7E6E6", color = "black", width = 0.8, size = 0.2) +
@@ -1241,7 +1241,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 #   theme_bw() +
 #   ylim(1, 5) +
 #   theme(panel.grid.minor.y = element_blank(), legend.position = "bottom") +
-#   scale_fill_manual("interval", values = c("A H-on (fc)" = "#64A0C8", "A H-on (fam)" = "#98C6EA", "A H-off" = "#999999", "B H-off" = "#DAD7CB")) +
+#   scale_fill_manual("interval", values = c("A L2H-on (fc)" = "#64A0C8", "A L2H-on (fam)" = "#98C6EA", "A L2H-off" = "#999999", "B L2H-off" = "#DAD7CB")) +
 #   labs(y="Score", x="",
 #        title = "TiA_overall") +
 #   stat_summary(fun = mean, geom="point",colour="black", size=2) +
@@ -1271,7 +1271,7 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
 #   ylim(1, 5) +
 #   theme(panel.grid.minor.y = element_blank(), legend.position = "bottom") +
 #   facet_wrap(~interval) +
-#   scale_fill_manual("interval", values = c("A H-on (fc)" = "#64A0C8", "A H-on (fam)" = "#98C6EA", "A H-off" = "#999999", "B H-off" = "#DAD7CB")) +
+#   scale_fill_manual("interval", values = c("A L2H-on (fc)" = "#64A0C8", "A L2H-on (fam)" = "#98C6EA", "A L2H-off" = "#999999", "B L2H-off" = "#DAD7CB")) +
 #   labs(y="Score", x="",
 #        title = "TiA_overall") +
 #   stat_summary(fun = mean, geom="point",colour="black", size=2) +
