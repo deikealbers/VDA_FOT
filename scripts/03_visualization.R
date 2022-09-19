@@ -316,12 +316,28 @@ NDRT <- bind_rows(NDRT_1, NDRT_2, NDRT_3, NDRT_4, NDRT_5, NDRT_6, NDRT_7, NDRT_8
   mutate(scale = factor(scale, levels = c("NDRT_1", "NDRT_2", "NDRT_3", "NDRT_4", "NDRT_5", "NDRT_6", "NDRT_7", "NDRT_8"), ordered = TRUE))
 ## lables
 labels_NDRT = c("Mobile device\nin hand - handling", "Mobile device\nin hand - talking", 
-                "Mobile device\nfixated - speaking", "Vehicle related inputs",
+                "Mobile device\nfixated - talking", "Vehicle related inputs",
                 "Eating/drinking/smoking", "Grooming", 
                 "Interaction with passengers", "Searching/grabbing/\nrummaging")
 
 ## basic plot ##
 p <- ggplot(NDRT, aes(x=scale, y=score, fill=scale)) + 
+  geom_rect(aes(xmin = 0.55, xmax = 1.45, ymin = 0, ymax = 5), 
+            fill = alpha("#FFFF00", 0.005)) +
+  geom_rect(aes(xmin = 3.55, xmax = 4.45, ymin = 0, ymax = 5), 
+            fill = alpha("#FFFF00", 0.005)) +
+  geom_rect(aes(xmin = 5.55, xmax = 6.45, ymin = 0, ymax = 5), 
+            fill = alpha("#FFFF00", 0.005)) +
+  geom_rect(aes(xmin = 7.55, xmax = 8.45, ymin = 0, ymax = 5), 
+            fill = alpha("#FFFF00", 0.005)) +
+  geom_rect(aes(xmin = 1.55, xmax = 2.45, ymin = 0, ymax = 5), 
+            fill = alpha("#92D050", 0.009)) +
+  geom_rect(aes(xmin = 4.55, xmax = 5.45, ymin = 0, ymax = 5), 
+            fill = alpha("#92D050", 0.009)) +
+  geom_rect(aes(xmin = 2.55, xmax = 3.45, ymin = 0, ymax = 5), 
+            fill = alpha("#E4321D", 0.005)) +
+  geom_rect(aes(xmin = 6.55, xmax = 7.45, ymin = 0, ymax = 5), 
+            fill = alpha("#E4321D", 0.005)) +
   stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
   geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
   stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
