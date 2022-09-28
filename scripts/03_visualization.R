@@ -512,6 +512,8 @@ plot_SystemUnderstanding <- ggplot(nachbefragung, aes(x = interval, y=100 * Syst
         axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
+        panel.border=element_blank(),
+        axis.line = element_line(colour = "black"),
         axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_SystemUnderstanding
 
@@ -622,6 +624,8 @@ plot_monitoring <- ggplot(nachbefragung, aes(x = interval, y=SubjUeberwachguete.
         axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
+        panel.border=element_blank(),
+        axis.line = element_line(colour = "black"),
         axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_monitoring
 
@@ -720,6 +724,8 @@ plot_ranking <- ggplot(nachbefragung_Aoff, aes(x = Ranking)) +
         legend.background = element_rect(fill = "transparent"),
         plot.background = element_rect(fill = "transparent",
                                        colour = NA_character_),
+        panel.border=element_blank(),
+        axis.line = element_line(colour = "black"),
         axis.text.x=element_text(color = "black", face="plain", size=9, angle=0, vjust=1),
         axis.text.y=element_text(color = "black", face="plain", size=9))
 plot_ranking
@@ -761,6 +767,8 @@ plot_age <- ggplot(vorbefragung, aes(x = group, y=Alter, fill = group)) +
         axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
+        panel.border=element_blank(),
+        axis.line = element_line(colour = "black"),
         axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_age
 
@@ -799,6 +807,8 @@ plot_license <- ggplot(vorbefragung, aes(x = group, y=Fuehrerschein, fill = grou
         axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
+        panel.border=element_blank(),
+        axis.line = element_line(colour = "black"),
         axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_license
 
@@ -950,6 +960,8 @@ plot_ATIS <- ggplot(vorbefragung, aes(x = group, y=ATIS, fill = group)) +
         axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
+        panel.border=element_blank(),
+        axis.line = element_line(colour = "black"),
         axis.text.y=element_text(color = "black", size=9, face = "plain"))
 plot_ATIS
 
