@@ -127,7 +127,11 @@
 "CTAM_PS","A_on_fam",30,4.92,1.32,5.17,2,7,NA
 "CTAM_PS","A_on_fc",29,4.9,1.34,5,2,7,NA
 "CTAM_PS","B_off",30,4.67,0.96,4.75,2,6,NA
-"System_sum","A_off",30,0.96,0.05,1,1,1,NA
-"System_sum","A_on_fam",30,0.95,0.06,0.97,1,1,NA
-"System_sum","A_on_fc",29,0.95,0.08,1,1,1,NA
-"System_sum","B_off",30,0.95,0.05,0.94,1,1,NA
+"SU_System_sum","A_off",30,0.94,0.1,1,1,1,NA
+"SU_System_sum","A_on_fam",30,0.93,0.09,1,1,1,NA
+"SU_System_sum","A_on_fc",29,0.93,0.1,1,1,1,NA
+"SU_System_sum","B_off",30,0.94,0.08,1,1,1,NA
+"SU_Role_sum","A_off",30,0.98,0.05,1,1,1,NA
+"SU_Role_sum","A_on_fam",30,0.97,0.06,1,1,1,NA
+"SU_Role_sum","A_on_fc",29,0.97,0.07,1,1,1,NA
+"SU_Role_sum","B_off",30,0.96,0.07,1,1,1,NA

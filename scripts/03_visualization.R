@@ -323,21 +323,21 @@ labels_NDRT = c("Mobile device\nin hand - handling", "Mobile device\nin hand - t
 ## basic plot ##
 p <- ggplot(NDRT, aes(x=scale, y=score, fill=scale)) + 
   geom_rect(aes(xmin = 0.55, xmax = 1.45, ymin = 0, ymax = 5), 
-            fill = alpha("#FFFF00", 0.005)) +
+            fill = scales::alpha("#FFFF00", 0.005)) +
   geom_rect(aes(xmin = 3.55, xmax = 4.45, ymin = 0, ymax = 5), 
-            fill = alpha("#FFFF00", 0.005)) +
+            fill = scales::alpha("#FFFF00", 0.005)) +
   geom_rect(aes(xmin = 5.55, xmax = 6.45, ymin = 0, ymax = 5), 
-            fill = alpha("#FFFF00", 0.005)) +
+            fill = scales::alpha("#FFFF00", 0.005)) +
   geom_rect(aes(xmin = 7.55, xmax = 8.45, ymin = 0, ymax = 5), 
-            fill = alpha("#FFFF00", 0.005)) +
+            fill = scales::alpha("#FFFF00", 0.005)) +
   geom_rect(aes(xmin = 1.55, xmax = 2.45, ymin = 0, ymax = 5), 
-            fill = alpha("#92D050", 0.009)) +
+            fill = scales::alpha("#92D050", 0.009)) +
   geom_rect(aes(xmin = 4.55, xmax = 5.45, ymin = 0, ymax = 5), 
-            fill = alpha("#92D050", 0.009)) +
+            fill = scales::alpha("#92D050", 0.009)) +
   geom_rect(aes(xmin = 2.55, xmax = 3.45, ymin = 0, ymax = 5), 
-            fill = alpha("#E4321D", 0.005)) +
+            fill = scales::alpha("#E4321D", 0.005)) +
   geom_rect(aes(xmin = 6.55, xmax = 7.45, ymin = 0, ymax = 5), 
-            fill = alpha("#E4321D", 0.005)) +
+            fill = scales::alpha("#E4321D", 0.005)) +
   stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
   geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
   stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
@@ -491,47 +491,98 @@ rm(list = setdiff(ls(), c("vorbefragung", "nachbefragung", "fun_mean", "fun_medi
                           "plot_L2components", "L2compo")))
 
 #### plot system understanding ####
-plot_SystemUnderstanding <- ggplot(nachbefragung, aes(x = interval, y=100 * System_sum, fill = interval)) +
+SU_scales_System <- nachbefragung %>%
+  select(interval, VPNr, SU_System_sum) %>%
+  rename(score = SU_System_sum) %>%
+  add_column(scale = "System", .after = "VPNr")
+
+SU_scales_Role <- nachbefragung %>%
+  select(interval, VPNr, SU_Role_sum) %>%
+  rename(score = SU_Role_sum) %>%
+  add_column(scale = "Role", .after = "VPNr")
+
+SU_scales <- bind_rows(SU_scales_System, SU_scales_Role) %>%
+  mutate(scale = factor(scale, levels = c("System", "Role"),
+                           ordered = TRUE))
+
+p <- ggplot(SU_scales, aes(x=scale, y=score*100, fill=scale)) + 
   stat_boxplot(geom ='errorbar', width = 0.3, lwd=0.2) +
   geom_boxplot(outlier.shape = 21, lwd=0.2, outlier.size = 0.7) +
   stat_summary(fun = mean, geom = "point" , colour="black", size=1, shape = 4) +
   scale_y_continuous(limits = c(0,100), breaks = seq(0,100,50)) +
-  scale_fill_manual(values = c("#FFC000","#FFD966", "#9BC2E6","#5B9BD5")) +
-  labs(y="Correct answers [%]") +
+  facet_grid(~interval) +
+  scale_fill_manual(values = c("#AEAAAA", "#D0CECE", "#D0CECE", "#D0CECE")) +
+  labs(y="Correct answers [%]", x="") +
   theme_bw() +
   theme(text=element_text(family = "sans", color="black", size=11, face = "bold"),
-        panel.grid.minor.y = element_blank(),
-        panel.grid.major.y = element_line(size = 0.2),
+        panel.grid.minor.y = element_blank(), 
         panel.grid.major.x = element_blank(),
-        legend.position = "bottom", 
-        legend.title = element_blank(),
-        legend.text = element_text(family = "sans", color="black", size=11, face = "plain"),
-        legend.background = element_rect(fill = "transparent"),
+        panel.grid.major.y = element_line(size = 0.2),
+        legend.position = "none", 
         plot.background = element_rect(fill = "transparent",
                                        colour = NA_character_),
-        axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank(),
-        panel.border=element_blank(),
-        axis.line = element_line(colour = "black"),
+        axis.text.x=element_text(color = "black", size=9, angle=0, vjust=.88, hjust=0.5, face = "plain"),
         axis.text.y=element_text(color = "black", size=9, face = "plain"))
-plot_SystemUnderstanding
+p
+
+## code of Valentin_Stefan to edit colors of facet boxes: 
+# https://stackoverflow.com/questions/53455092/r-ggplot2-change-colour-of-font-and-background-in-facet-strip
+# Generate the ggplot2 plot grob
+g <- grid.force(ggplotGrob(p))
+# Get the names of grobs and their gPaths into a data.frame structure
+grobs_df <- do.call(cbind.data.frame, grid.ls(g, print = FALSE))
+# Build optimal gPaths that will be later used to identify grobs and edit them
+grobs_df$gPath_full <- paste(grobs_df$gPath, grobs_df$name, sep = "::")
+grobs_df$gPath_full <- gsub(pattern = "layout::", 
+                            replacement = "", 
+                            x = grobs_df$gPath_full, 
+                            fixed = TRUE)
+# Get the gPaths of the strip background grobs
+strip_bg_gpath <- grobs_df$gPath_full[grepl(pattern = ".*strip\\.background.*", 
+                                            x = grobs_df$gPath_full)]
+strip_bg_gpath[1]
+strip_txt_gpath <- grobs_df$gPath_full[grepl(pattern = "strip.*titleGrob.*text.*", 
+                                             x = grobs_df$gPath_full)]
+strip_txt_gpath[1] # example of a gPath for strip title
+## [1] "strip-t-1.7-5-7-5::strip.1-1-1-1::GRID.titleGrob.5368::GRID.text.5364"
+# Generate some color
+n_cols <- length(strip_bg_gpath)
+fills <- c("#FFC000","#FFD966", "#9BC2E6","#5B9BD5")
+# Edit the grobs
+for (i in 1:length(strip_bg_gpath)){
+  g <- editGrob(grob = g, gPath = strip_bg_gpath[i], gp = gpar(fill = fills[i]))
+}
+# Draw the edited plot
+grid.newpage(); grid.draw(g)
+
+plot_SystemUnderstanding <- g
 
 ggsave(filename = "data/results/figures/new/SystemUnderstanding_new.png", plot_SystemUnderstanding, 
-       dpi = 500, width = 5, height = 3, units = "in", device='png', bg = "transparent")
+       dpi = 500, width = 8, height = 3, units = "in", device='png', bg = "transparent")
 
 #### plot System Understanding - single questions ####
 ## build subset ##
 SystemUnderstanding_singleQ_means <- nachbefragung %>%
-  select(interval, starts_with("System0"), starts_with("System1")) %>%
+  select(interval, starts_with("System0"), starts_with("System1"),
+         starts_with("Role0"), starts_with("Role1")) %>%
   group_by(interval) %>%
   FOT_skim() %>%
   select(interval, skim_variable, numeric.mean) %>%
   rename(question = skim_variable) %>%
-  rename(mean = numeric.mean)
+  rename(mean = numeric.mean) %>%
+  mutate(question = factor(question, levels = c("System01", "System02", "System03", "System04",
+                                                "System05", "System06", "System07", "System08",
+                                                "System09", "System16", "System17",
+                                                "Role01", "Role02", "Role03", "Role04",
+                                                "Role08", "Role09", "Role10", "Role11"),
+                           ordered = TRUE))
 
 ## basic plot ##
 p <- ggplot(SystemUnderstanding_singleQ_means, aes(x = question, y=mean*100)) +
+  geom_rect(aes(xmin = 0.5, xmax = 6.5, ymin = -Inf, ymax = Inf), 
+            fill = scales::alpha("#D0CECE", 0.05)) +
+  geom_rect(aes(xmin = 8.5, xmax = 12.5, ymin = -Inf, ymax = Inf), 
+            fill = scales::alpha("#D0CECE", 0.05)) +
   geom_line(aes(group = interval)) +
   geom_point() +
   stat_summary(fun = mean, geom="point",colour="black", size=1) +
@@ -539,10 +590,7 @@ p <- ggplot(SystemUnderstanding_singleQ_means, aes(x = question, y=mean*100)) +
   labs(y="Correct answers [%]") +
   facet_grid(interval ~.) +
   scale_y_continuous(limits = c(0,100), breaks = seq(0,100,50)) +
-  scale_x_discrete(labels= c("Question 1", "Question 2", "Question 3", "Question 4",
-                             "Question 5", "Question 6", "Question 7", "Question 8",
-                             "Question 9", "Question 10", "Question 11", "Question 12",
-                             "Question 13", "Question 14", "Question 15", "Question 16")) +
+  scale_x_discrete() +
   theme_bw() +
   theme(text=element_text(family = "sans", color="black", size=11, face="bold"),
         panel.grid.minor.y = element_blank(),
